@@ -73,6 +73,8 @@
 
             -webkit-user-select: none;
             user-select: none;
+
+            cursor: pointer;
         }
 
         .button:active {
@@ -93,6 +95,14 @@
             color: #6b7280;
         }
 
+        .loading {
+            display: none;
+            margin-top: 25px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #374151;
+        }
+
     </style>
 
 </head>
@@ -108,6 +118,7 @@
         <a
             class="button piramide"
             href="http://checklist.id-logistics.com.br/"
+            onclick="abrirSistema(event, this.href)"
         >
             PIRÂMIDE DE SEGURANÇA
         </a>
@@ -115,15 +126,81 @@
         <a
             class="button equality"
             href="https://e-quality.id-logistics.com.br/index.php"
+            onclick="abrirSistema(event, this.href)"
         >
             E-QUALITY
         </a>
+
+        <div class="loading" id="loading">
+            Abrindo sistema...
+        </div>
 
         <div class="footer">
             Selecione uma opção para continuar
         </div>
 
     </div>
+
+
+    <script>
+
+        function abrirSistema(event, url) {
+
+            event.preventDefault();
+
+            document.getElementById("loading").style.display = "block";
+
+            /*
+             * Verifica se o Fully Kiosk
+             * disponibilizou a interface JavaScript.
+             */
+
+            if (typeof fully !== "undefined") {
+
+                try {
+
+                    /*
+                     * Limpa os cookies da sessão anterior.
+                     */
+                    if (typeof fully.clearCookies === "function") {
+                        fully.clearCookies();
+                    }
+
+                } catch (e) {
+                    console.log("Erro ao limpar cookies:", e);
+                }
+
+
+                try {
+
+                    /*
+                     * Limpa o cache.
+                     */
+                    if (typeof fully.clearCache === "function") {
+                        fully.clearCache();
+                    }
+
+                } catch (e) {
+                    console.log("Erro ao limpar cache:", e);
+                }
+
+            }
+
+
+            /*
+             * Aguarda a limpeza terminar antes
+             * de abrir o próximo sistema.
+             */
+
+            setTimeout(function () {
+
+                window.location.href = url;
+
+            }, 1500);
+
+        }
+
+    </script>
 
 </body>
 
