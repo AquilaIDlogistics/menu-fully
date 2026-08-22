@@ -114,7 +114,8 @@
 
     <a
         class="button piramide"
-        href="http://checklist.id-logistics.com.br/"
+        href="#"
+        onclick="abrirSistema('piramide'); return false;"
     >
         PIRÂMIDE DE SEGURANÇA
     </a>
@@ -124,7 +125,8 @@
 
     <a
         class="button equality"
-        href="https://e-quality.id-logistics.com.br/index.php"
+        href="#"
+        onclick="abrirSistema('equality'); return false;"
     >
         E-QUALITY
     </a>
@@ -135,6 +137,169 @@
     </div>
 
 </div>
+
+
+<script>
+
+    /*
+     * URLs DOS SISTEMAS
+     */
+
+    const PIRAMIDE =
+        "http://checklist.id-logistics.com.br/";
+
+    const EQUALITY =
+        "https://e-quality.id-logistics.com.br/index.php";
+
+
+    /*
+     * CHAVE PARA GUARDAR TEMPORARIAMENTE
+     * O SISTEMA ESCOLHIDO
+     */
+
+    const CHAVE =
+        "sistemaEscolhido";
+
+
+    /*
+     * QUANDO CLICAR EM UM SISTEMA
+     */
+
+    function abrirSistema(sistema) {
+
+        let destino;
+
+
+        if (sistema === "piramide") {
+
+            destino = PIRAMIDE;
+
+        } else {
+
+            destino = EQUALITY;
+
+        }
+
+
+        /*
+         * GUARDA O DESTINO ANTES
+         * DE REINICIAR O FULLY
+         */
+
+        try {
+
+            localStorage.setItem(
+                CHAVE,
+                destino
+            );
+
+        } catch (erro) {
+
+            console.log(
+                "Erro ao salvar sistema:",
+                erro
+            );
+
+        }
+
+
+        /*
+         * REINICIA O FULLY
+         */
+
+        if (
+            typeof fully !== "undefined" &&
+            typeof fully.restartApp === "function"
+        ) {
+
+            fully.restartApp();
+
+            return;
+        }
+
+
+        /*
+         * CASO A INTERFACE DO FULLY
+         * NÃO ESTEJA DISPONÍVEL
+         */
+
+        window.location.replace(destino);
+
+    }
+
+
+    /*
+     * QUANDO O FULLY VOLTAR
+     */
+
+    window.addEventListener(
+        "load",
+        function () {
+
+            let destino = null;
+
+
+            /*
+             * RECUPERA O SISTEMA ESCOLHIDO
+             */
+
+            try {
+
+                destino =
+                    localStorage.getItem(CHAVE);
+
+            } catch (erro) {
+
+                console.log(
+                    "Erro ao recuperar sistema:",
+                    erro
+                );
+
+            }
+
+
+            /*
+             * SE NÃO EXISTIR NADA SALVO,
+             * PERMANECE NO MENU
+             */
+
+            if (!destino) {
+
+                return;
+
+            }
+
+
+            /*
+             * APAGA A ESCOLHA ANTES DE ABRIR
+             *
+             * ISSO EVITA LOOP DE REINICIALIZAÇÃO.
+             */
+
+            try {
+
+                localStorage.removeItem(CHAVE);
+
+            } catch (erro) {
+
+                console.log(
+                    "Erro ao remover sistema:",
+                    erro
+                );
+
+            }
+
+
+            /*
+             * ABRE O SISTEMA ESCOLHIDO
+             */
+
+            window.location.replace(destino);
+
+        }
+    );
+
+</script>
 
 </body>
 
