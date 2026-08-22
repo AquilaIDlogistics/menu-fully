@@ -50,8 +50,10 @@
 
         .button {
             display: flex;
+
             width: 100%;
             min-height: 120px;
+
             margin: 20px 0;
 
             border: none;
@@ -71,6 +73,10 @@
 
             -webkit-user-select: none;
             user-select: none;
+
+            cursor: pointer;
+
+            transition: transform 0.05s;
         }
 
         .button:active {
@@ -103,147 +109,32 @@
         SELECIONE O SISTEMA
     </div>
 
+
+    <!-- PIRÂMIDE -->
+
     <a
         class="button piramide"
-        href="#"
-        onclick="abrirSistema('piramide'); return false;"
+        href="http://checklist.id-logistics.com.br/"
     >
         PIRÂMIDE DE SEGURANÇA
     </a>
 
+
+    <!-- E-QUALITY -->
+
     <a
         class="button equality"
-        href="#"
-        onclick="abrirSistema('equality'); return false;"
+        href="https://e-quality.id-logistics.com.br/index.php"
     >
         E-QUALITY
     </a>
+
 
     <div class="footer">
         Selecione uma opção para continuar
     </div>
 
 </div>
-
-
-<script>
-
-const PIRAMIDE =
-    "http://checklist.id-logistics.com.br/";
-
-const EQUALITY =
-    "https://e-quality.id-logistics.com.br/index.php";
-
-const CHAVE =
-    "sistemaEscolhido";
-
-
-function abrirSistema(sistema) {
-
-    /*
-     * Define imediatamente o destino.
-     */
-
-    let destino =
-        sistema === "piramide"
-            ? PIRAMIDE
-            : EQUALITY;
-
-
-    /*
-     * Salva ANTES de reiniciar o Fully.
-     */
-
-    try {
-
-        localStorage.setItem(
-            CHAVE,
-            destino
-        );
-
-    } catch (e) {
-
-        console.log(e);
-
-    }
-
-
-    /*
-     * REINICIA O FULLY IMEDIATAMENTE.
-     */
-
-    if (
-        typeof fully !== "undefined" &&
-        typeof fully.restartApp === "function"
-    ) {
-
-        fully.restartApp();
-
-        return;
-    }
-
-
-    /*
-     * Fallback.
-     */
-
-    window.location.replace(destino);
-}
-
-
-/*
- * O Fully voltou.
- *
- * Agora verificamos se havia um sistema
- * aguardando para ser aberto.
- */
-
-(function() {
-
-    let destino = null;
-
-    try {
-
-        destino =
-            localStorage.getItem(CHAVE);
-
-    } catch (e) {
-
-        console.log(e);
-
-    }
-
-
-    if (!destino) {
-        return;
-    }
-
-
-    /*
-     * Apaga a informação PRIMEIRO.
-     * Assim não existe risco de loop.
-     */
-
-    try {
-
-        localStorage.removeItem(CHAVE);
-
-    } catch (e) {
-
-        console.log(e);
-
-    }
-
-
-    /*
-     * Abre imediatamente.
-     */
-
-    window.location.replace(destino);
-
-})();
-
-</script>
 
 </body>
 
