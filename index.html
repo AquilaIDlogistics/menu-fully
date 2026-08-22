@@ -89,18 +89,18 @@
             background: #248a55;
         }
 
-        .footer {
-            margin-top: 30px;
-            font-size: 15px;
-            color: #6b7280;
-        }
-
         .loading {
             display: none;
             margin-top: 25px;
             font-size: 20px;
             font-weight: bold;
             color: #374151;
+        }
+
+        .footer {
+            margin-top: 30px;
+            font-size: 15px;
+            color: #6b7280;
         }
 
     </style>
@@ -118,7 +118,7 @@
         <a
             class="button piramide"
             href="http://checklist.id-logistics.com.br/"
-            onclick="abrirSistema(event, this.href)"
+            onclick="abrirSistema(event, 'piramide')"
         >
             PIRÂMIDE DE SEGURANÇA
         </a>
@@ -126,13 +126,13 @@
         <a
             class="button equality"
             href="https://e-quality.id-logistics.com.br/index.php"
-            onclick="abrirSistema(event, this.href)"
+            onclick="abrirSistema(event, 'equality')"
         >
             E-QUALITY
         </a>
 
-        <div class="loading" id="loading">
-            Abrindo sistema...
+        <div id="loading" class="loading">
+            Preparando sistema...
         </div>
 
         <div class="footer">
@@ -144,61 +144,185 @@
 
     <script>
 
-        function abrirSistema(event, url) {
+        const PIRAMIDE =
+            "http://checklist.id-logistics.com.br/";
+
+        const EQUALITY =
+            "https://e-quality.id-logistics.com.br/index.php";
+
+
+        function abrirSistema(event, sistema) {
 
             event.preventDefault();
 
-            document.getElementById("loading").style.display = "block";
+            const loading =
+                document.getElementById("loading");
+
+            loading.style.display = "block";
+
+
+            let destino = "";
+
+            if (sistema === "piramide") {
+                destino = PIRAMIDE;
+            }
+
+            if (sistema === "equality") {
+                destino = EQUALITY;
+            }
+
 
             /*
-             * Verifica se o Fully Kiosk
-             * disponibilizou a interface JavaScript.
+             * Guarda somente qual sistema
+             * o usuário escolheu.
              */
 
-            if (typeof fully !== "undefined") {
+            try {
+                localStorage.setItem(
+                    "sistemaEscolhido",
+                    sistema
+                );
+
+                localStorage.setItem(
+                    "destinoSistema",
+                    destino
+                );
+
+            } catch (erro) {
+
+                console.log(
+                    "Não foi possível salvar a escolha:",
+                    erro
+                );
+
+            }
+
+
+            /*
+             * Se o Fully disponibilizar
+             * restartApp(), tentamos reiniciar
+             * o aplicativo.
+             */
+
+            if (
+                typeof fully !== "undefined" &&
+                typeof fully.restartApp === "function"
+            ) {
 
                 try {
 
-                    /*
-                     * Limpa os cookies da sessão anterior.
-                     */
-                    if (typeof fully.clearCookies === "function") {
-                        fully.clearCookies();
-                    }
+                    fully.restartApp();
 
-                } catch (e) {
-                    console.log("Erro ao limpar cookies:", e);
-                }
+                    return;
 
+                } catch (erro) {
 
-                try {
+                    console.log(
+                        "restartApp não funcionou:",
+                        erro
+                    );
 
-                    /*
-                     * Limpa o cache.
-                     */
-                    if (typeof fully.clearCache === "function") {
-                        fully.clearCache();
-                    }
-
-                } catch (e) {
-                    console.log("Erro ao limpar cache:", e);
                 }
 
             }
 
 
             /*
-             * Aguarda a limpeza terminar antes
-             * de abrir o próximo sistema.
+             * Caso restartApp não esteja disponível,
+             * abrimos normalmente o sistema.
              */
 
             setTimeout(function () {
 
-                window.location.href = url;
+                window.location.href = destino;
 
-            }, 1500);
+            }, 500);
 
         }
+
+
+        /*
+         * Quando o GitHub Pages abrir novamente,
+         * verifica se existe uma escolha pendente.
+         */
+
+        window.addEventListener(
+            "load",
+            function () {
+
+                let sistema = null;
+
+                let destino = null;
+
+
+                try {
+
+                    sistema =
+                        localStorage.getItem(
+                            "sistemaEscolhido"
+                        );
+
+                    destino =
+                        localStorage.getItem(
+                            "destinoSistema"
+                        );
+
+                } catch (erro) {
+
+                    console.log(
+                        "Erro ao ler escolha:",
+                        erro
+                    );
+
+                }
+
+
+                /*
+                 * Se existe uma escolha pendente,
+                 * abre o sistema.
+                 */
+
+                if (
+                    sistema &&
+                    destino
+                ) {
+
+                    /*
+                     * Remove primeiro para evitar
+                     * loop infinito após o restart.
+                     */
+
+                    try {
+
+                        localStorage.removeItem(
+                            "sistemaEscolhido"
+                        );
+
+                        localStorage.removeItem(
+                            "destinoSistema"
+                        );
+
+                    } catch (erro) {
+
+                        console.log(
+                            "Erro ao limpar escolha:",
+                            erro
+                        );
+
+                    }
+
+
+                    setTimeout(function () {
+
+                        window.location.href =
+                            destino;
+
+                    }, 1000);
+
+                }
+
+            }
+        );
 
     </script>
 
