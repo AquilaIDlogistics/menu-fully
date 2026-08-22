@@ -2,90 +2,96 @@
 <html lang="pt-BR">
 
 <head>
+<meta charset="UTF-8">
 
-    <meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width,
+maximum-scale=1.0,
+user-scalable=no">
 
-    <meta name="viewport"
-          content="width=device-width,
-                   initial-scale=1.0,
-                   maximum-scale=1.0,
-                   user-scalable=no">
+<title>Selecione o Sistema</title>
 
-    <title>Selecione o Sistema</title>
+<style>
 
-    <style>
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
 
-        * {
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
+html,
+body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f2f4f7;
+    overflow: hidden;
+}
 
-        html,
-        body {
-            margin: 0;
-            width: 100%;
-            height: 100%;
-            font-family: Arial, Helvetica, sans-serif;
-            background: #f2f4f7;
-            overflow: hidden;
-        }
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-        body {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+.container {
+    width: 92vw;
+    max-width: 700px;
+    text-align: center;
+}
 
-        .container {
-            width: 92vw;
-            max-width: 700px;
-            text-align: center;
-        }
+.title {
+    font-size: 42px;
+    font-weight: bold;
+    color: #1f2937;
+    margin-bottom: 40px;
+}
 
-        .title {
-            font-size: 42px;
-            font-weight: bold;
-            color: #1f2937;
-            margin-bottom: 40px;
-        }
+.button {
+    display: flex;
 
-        .button {
-            display: flex;
-            width: 100%;
-            min-height: 120px;
-            margin: 20px 0;
-            border: none;
-            border-radius: 18px;
-            font-size: 32px;
-            font-weight: bold;
-            color: white;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            box-shadow: 0 5px 14px rgba(0,0,0,0.18);
-            user-select: none;
-            cursor: pointer;
-        }
+    width: 100%;
+    min-height: 120px;
 
-        .button:active {
-            transform: scale(0.97);
-        }
+    margin: 20px 0;
 
-        .piramide {
-            background: #1f5f99;
-        }
+    border: none;
+    border-radius: 18px;
 
-        .equality {
-            background: #248a55;
-        }
+    font-size: 32px;
+    font-weight: bold;
 
-        .footer {
-            margin-top: 30px;
-            font-size: 15px;
-            color: #6b7280;
-        }
+    color: white;
 
-    </style>
+    align-items: center;
+    justify-content: center;
+
+    text-decoration: none;
+
+    box-shadow: 0 5px 14px rgba(0,0,0,0.18);
+
+    user-select: none;
+}
+
+.piramide {
+    background: #1f5f99;
+}
+
+.equality {
+    background: #248a55;
+}
+
+.button:active {
+    transform: scale(0.97);
+}
+
+.footer {
+    margin-top: 30px;
+    font-size: 15px;
+    color: #6b7280;
+}
+
+</style>
 
 </head>
 
@@ -93,146 +99,130 @@
 
 <div class="container">
 
-    <div class="title">
-        SELECIONE O SISTEMA
-    </div>
+<div class="title">
+SELECIONE O SISTEMA
+</div>
 
-    <a
-        class="button piramide"
-        href="#"
-        onclick="abrirSistema('piramide'); return false;"
-    >
-        PIRÂMIDE DE SEGURANÇA
-    </a>
 
-    <a
-        class="button equality"
-        href="#"
-        onclick="abrirSistema('equality'); return false;"
-    >
-        E-QUALITY
-    </a>
+<a
+class="button piramide"
+href="http://checklist.id-logistics.com.br/"
+onclick="escolher('piramide')"
+>
+PIRÂMIDE DE SEGURANÇA
+</a>
 
-    <div class="footer">
-        Selecione uma opção para continuar
-    </div>
+
+<a
+class="button equality"
+href="https://e-quality.id-logistics.com.br/index.php"
+onclick="escolher('equality')"
+>
+E-QUALITY
+</a>
+
+
+<div class="footer">
+Selecione uma opção para continuar
+</div>
 
 </div>
 
 
 <script>
 
-const PIRAMIDE =
-    "http://checklist.id-logistics.com.br/";
+function escolher(sistema) {
 
-const EQUALITY =
-    "https://e-quality.id-logistics.com.br/index.php";
+    /*
+     * GUARDA O SISTEMA ESCOLHIDO
+     */
 
-const MENU =
-    "https://aquilasantos.github.io/SEU-REPOSITORIO/menu.html";
+    document.cookie =
+        "sistema=" +
+        sistema +
+        "; path=/";
 
 
-function abrirSistema(sistema) {
+    /*
+     * REINICIA O FULLY
+     */
 
-    let destino;
+    if (
+        typeof fully !== "undefined" &&
+        typeof fully.restartApp === "function"
+    ) {
 
-    if (sistema === "piramide") {
-
-        destino = PIRAMIDE;
-
-    } else {
-
-        destino = EQUALITY;
+        fully.restartApp();
 
     }
-
-
-    /*
-     * GUARDA O DESTINO NA URL DO MENU.
-     */
-
-    const menuComDestino =
-        MENU +
-        "?sistema=" +
-        encodeURIComponent(sistema);
-
-
-    /*
-     * PRIMEIRO VAI PARA O MENU COM O DESTINO.
-     */
-
-    window.location.href = menuComDestino;
-
-
-    /*
-     * PEQUENO TEMPO PARA A URL SER PROCESSADA
-     * ANTES DO RESTART.
-     */
-
-    setTimeout(function () {
-
-        if (
-            typeof fully !== "undefined" &&
-            typeof fully.restartApp === "function"
-        ) {
-
-            fully.restartApp();
-
-        }
-
-    }, 300);
 
 }
 
 
 /*
- * VERIFICA SE O FULLY VOLTOU
- * COM UM SISTEMA SELECIONADO.
+ * RECUPERA O SISTEMA
  */
 
-window.addEventListener(
-    "load",
-    function () {
+function pegarSistema() {
 
-        const parametros =
-            new URLSearchParams(
-                window.location.search
+    const cookies =
+        document.cookie.split(";");
+
+    for (let cookie of cookies) {
+
+        cookie =
+            cookie.trim();
+
+        if (
+            cookie.indexOf("sistema=") === 0
+        ) {
+
+            return cookie.substring(
+                "sistema=".length
             );
-
-
-        const sistema =
-            parametros.get("sistema");
-
-
-        /*
-         * SE NÃO TEM SISTEMA,
-         * É O MENU NORMAL.
-         */
-
-        if (!sistema) {
-
-            return;
-
-        }
-
-
-        /*
-         * ESCOLHE O DESTINO.
-         */
-
-        if (sistema === "piramide") {
-
-            window.location.replace(PIRAMIDE);
-
-        }
-
-        else if (sistema === "equality") {
-
-            window.location.replace(EQUALITY);
 
         }
 
     }
+
+    return null;
+
+}
+
+
+window.addEventListener(
+    "load",
+    function() {
+
+        const sistema =
+            pegarSistema();
+
+
+        if (sistema === "piramide") {
+
+            document.cookie =
+                "sistema=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+
+            window.location.replace(
+                "http://checklist.id-logistics.com.br/"
+            );
+
+        }
+
+
+        if (sistema === "equality") {
+
+            document.cookie =
+                "sistema=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+
+            window.location.replace(
+                "https://e-quality.id-logistics.com.br/index.php"
+            );
+
+        }
+
+    }
+
 );
 
 </script>
