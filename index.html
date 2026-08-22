@@ -50,8 +50,10 @@
 
         .button {
             display: flex;
+
             width: 100%;
             min-height: 120px;
+
             margin: 20px 0;
 
             border: none;
@@ -73,6 +75,8 @@
             user-select: none;
 
             cursor: pointer;
+
+            transition: transform 0.05s;
         }
 
         .button:active {
@@ -85,14 +89,6 @@
 
         .equality {
             background: #248a55;
-        }
-
-        .loading {
-            display: none;
-            margin-top: 25px;
-            font-size: 20px;
-            font-weight: bold;
-            color: #374151;
         }
 
         .footer {
@@ -116,8 +112,8 @@
 
     <a
         class="button piramide"
-        href="#"
-        onclick="escolherSistema('piramide')"
+        href="http://checklist.id-logistics.com.br/"
+        onclick="abrirSistema(event, 'piramide')"
     >
         PIRÂMIDE DE SEGURANÇA
     </a>
@@ -125,19 +121,11 @@
 
     <a
         class="button equality"
-        href="#"
-        onclick="escolherSistema('equality')"
+        href="https://e-quality.id-logistics.com.br/index.php"
+        onclick="abrirSistema(event, 'equality')"
     >
         E-QUALITY
     </a>
-
-
-    <div
-        id="loading"
-        class="loading"
-    >
-        Preparando sistema...
-    </div>
 
 
     <div class="footer">
@@ -150,10 +138,6 @@
 <script>
 
 
-/*
- * URLs dos sistemas
- */
-
 const PIRAMIDE =
     "http://checklist.id-logistics.com.br/";
 
@@ -161,193 +145,135 @@ const EQUALITY =
     "https://e-quality.id-logistics.com.br/index.php";
 
 
-/*
- * Chave usada para guardar temporariamente
- * o sistema escolhido.
- */
-
 const CHAVE =
-    "sistema_para_abrir";
+    "sistemaEscolhido";
 
 
-/*
- * Quando o usuário escolhe um sistema.
- */
+function abrirSistema(event, sistema) {
 
-function escolherSistema(sistema) {
-
-    const loading =
-        document.getElementById("loading");
-
-    loading.style.display = "block";
+    event.preventDefault();
 
 
-    /*
-     * Guarda a escolha.
-     */
-
-    try {
-
-        localStorage.setItem(
-            CHAVE,
-            sistema
-        );
-
-    } catch (erro) {
-
-        console.log(
-            "Erro ao salvar escolha:",
-            erro
-        );
-
-    }
-
-
-    /*
-     * Se o Fully possui loadStartUrl(),
-     * mandamos ele carregar novamente
-     * a Start URL.
-     */
-
-    if (
-        typeof fully !== "undefined" &&
-        typeof fully.loadStartUrl === "function"
-    ) {
-
-        try {
-
-            fully.loadStartUrl();
-
-            return;
-
-        } catch (erro) {
-
-            console.log(
-                "loadStartUrl falhou:",
-                erro
-            );
-
-        }
-
-    }
-
-
-    /*
-     * Fallback caso a API do Fully
-     * não esteja disponível.
-     */
-
-    abrirSistemaEscolhido();
-
-}
-
-
-/*
- * Essa função é executada quando
- * o GitHub Pages carrega novamente.
- */
-
-function abrirSistemaEscolhido() {
-
-    let sistema = null;
-
-
-    try {
-
-        sistema =
-            localStorage.getItem(CHAVE);
-
-    } catch (erro) {
-
-        console.log(
-            "Erro lendo escolha:",
-            erro
-        );
-
-    }
-
-
-    /*
-     * Não existe sistema pendente.
-     * Então permanece na tela inicial.
-     */
-
-    if (!sistema) {
-        return;
-    }
-
-
-    /*
-     * IMPORTANTE:
-     *
-     * Apaga a escolha ANTES de abrir
-     * o sistema para impedir loop.
-     */
-
-    try {
-
-        localStorage.removeItem(CHAVE);
-
-    } catch (erro) {
-
-        console.log(
-            "Erro removendo escolha:",
-            erro
-        );
-
-    }
-
-
-    let destino = null;
+    let destino;
 
 
     if (sistema === "piramide") {
 
         destino = PIRAMIDE;
 
-    }
-
-
-    if (sistema === "equality") {
+    } else {
 
         destino = EQUALITY;
 
     }
 
 
-    if (!destino) {
-        return;
+    /*
+     * Guarda a escolha antes de reiniciar
+     * o Fully.
+     */
+
+    try {
+
+        localStorage.setItem(
+            CHAVE,
+            destino
+        );
+
+    } catch (erro) {
+
+        console.log(erro);
+
     }
 
 
     /*
-     * Pequena espera para o WebView
-     * terminar de carregar a página.
+     * Reinicia imediatamente o Fully.
      */
 
-    setTimeout(function() {
+    if (
+        typeof fully !== "undefined" &&
+        typeof fully.restartApp === "function"
+    ) {
 
-        window.location.replace(destino);
+        fully.restartApp();
 
-    }, 100);
+        return;
+
+    }
+
+
+    /*
+     * Fallback caso a API não esteja disponível.
+     */
+
+    window.location.href = destino;
 
 }
 
 
 /*
- * Executa quando a página termina
- * de carregar.
+ * Quando o Fully reiniciar e carregar
+ * novamente o GitHub Pages, verifica
+ * qual sistema foi escolhido.
  */
 
 window.addEventListener(
     "load",
     function() {
 
-        abrirSistemaEscolhido();
+        let destino = null;
+
+
+        try {
+
+            destino =
+                localStorage.getItem(CHAVE);
+
+        } catch (erro) {
+
+            console.log(erro);
+
+        }
+
+
+        /*
+         * Nada pendente.
+         */
+
+        if (!destino) {
+            return;
+        }
+
+
+        /*
+         * Remove imediatamente para evitar
+         * qualquer possibilidade de loop.
+         */
+
+        try {
+
+            localStorage.removeItem(CHAVE);
+
+        } catch (erro) {
+
+            console.log(erro);
+
+        }
+
+
+        /*
+         * Abre o sistema assim que o GitHub
+         * terminar de carregar.
+         *
+         * Não existe mais espera de 1 segundo.
+         */
+
+        window.location.replace(destino);
 
     }
-);
 
+);
 
 </script>
 
