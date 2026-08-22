@@ -50,10 +50,8 @@
 
         .button {
             display: flex;
-
             width: 100%;
             min-height: 120px;
-
             margin: 20px 0;
 
             border: none;
@@ -73,10 +71,6 @@
 
             -webkit-user-select: none;
             user-select: none;
-
-            cursor: pointer;
-
-            transition: transform 0.05s;
         }
 
         .button:active {
@@ -109,24 +103,21 @@
         SELECIONE O SISTEMA
     </div>
 
-
     <a
         class="button piramide"
-        href="http://checklist.id-logistics.com.br/"
-        onclick="abrirSistema(event, 'piramide')"
+        href="#"
+        onclick="abrirSistema('piramide'); return false;"
     >
         PIRÂMIDE DE SEGURANÇA
     </a>
 
-
     <a
         class="button equality"
-        href="https://e-quality.id-logistics.com.br/index.php"
-        onclick="abrirSistema(event, 'equality')"
+        href="#"
+        onclick="abrirSistema('equality'); return false;"
     >
         E-QUALITY
     </a>
-
 
     <div class="footer">
         Selecione uma opção para continuar
@@ -137,40 +128,30 @@
 
 <script>
 
-
 const PIRAMIDE =
     "http://checklist.id-logistics.com.br/";
 
 const EQUALITY =
     "https://e-quality.id-logistics.com.br/index.php";
 
-
 const CHAVE =
     "sistemaEscolhido";
 
 
-function abrirSistema(event, sistema) {
+function abrirSistema(sistema) {
 
-    event.preventDefault();
+    /*
+     * Define imediatamente o destino.
+     */
 
-
-    let destino;
-
-
-    if (sistema === "piramide") {
-
-        destino = PIRAMIDE;
-
-    } else {
-
-        destino = EQUALITY;
-
-    }
+    let destino =
+        sistema === "piramide"
+            ? PIRAMIDE
+            : EQUALITY;
 
 
     /*
-     * Guarda a escolha antes de reiniciar
-     * o Fully.
+     * Salva ANTES de reiniciar o Fully.
      */
 
     try {
@@ -180,15 +161,15 @@ function abrirSistema(event, sistema) {
             destino
         );
 
-    } catch (erro) {
+    } catch (e) {
 
-        console.log(erro);
+        console.log(e);
 
     }
 
 
     /*
-     * Reinicia imediatamente o Fully.
+     * REINICIA O FULLY IMEDIATAMENTE.
      */
 
     if (
@@ -199,81 +180,68 @@ function abrirSistema(event, sistema) {
         fully.restartApp();
 
         return;
+    }
+
+
+    /*
+     * Fallback.
+     */
+
+    window.location.replace(destino);
+}
+
+
+/*
+ * O Fully voltou.
+ *
+ * Agora verificamos se havia um sistema
+ * aguardando para ser aberto.
+ */
+
+(function() {
+
+    let destino = null;
+
+    try {
+
+        destino =
+            localStorage.getItem(CHAVE);
+
+    } catch (e) {
+
+        console.log(e);
+
+    }
+
+
+    if (!destino) {
+        return;
+    }
+
+
+    /*
+     * Apaga a informação PRIMEIRO.
+     * Assim não existe risco de loop.
+     */
+
+    try {
+
+        localStorage.removeItem(CHAVE);
+
+    } catch (e) {
+
+        console.log(e);
 
     }
 
 
     /*
-     * Fallback caso a API não esteja disponível.
+     * Abre imediatamente.
      */
 
-    window.location.href = destino;
+    window.location.replace(destino);
 
-}
-
-
-/*
- * Quando o Fully reiniciar e carregar
- * novamente o GitHub Pages, verifica
- * qual sistema foi escolhido.
- */
-
-window.addEventListener(
-    "load",
-    function() {
-
-        let destino = null;
-
-
-        try {
-
-            destino =
-                localStorage.getItem(CHAVE);
-
-        } catch (erro) {
-
-            console.log(erro);
-
-        }
-
-
-        /*
-         * Nada pendente.
-         */
-
-        if (!destino) {
-            return;
-        }
-
-
-        /*
-         * Remove imediatamente para evitar
-         * qualquer possibilidade de loop.
-         */
-
-        try {
-
-            localStorage.removeItem(CHAVE);
-
-        } catch (erro) {
-
-            console.log(erro);
-
-        }
-
-
-        /*
-         * Abre o sistema assim que o GitHub
-         * terminar de carregar.
-         *
-         * Não existe mais espera de 1 segundo.
-         */
-
-        window.location.replace(destino);
-
-    }
-
-);
+})();
 
 </script>
 
