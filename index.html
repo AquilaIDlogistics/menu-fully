@@ -53,16 +53,25 @@
             width: 100%;
             min-height: 120px;
             margin: 20px 0;
+
             border: none;
             border-radius: 18px;
+
             font-size: 32px;
             font-weight: bold;
+
             color: white;
+
             align-items: center;
             justify-content: center;
+
             text-decoration: none;
+
             box-shadow: 0 5px 14px rgba(0,0,0,0.18);
+
+            -webkit-user-select: none;
             user-select: none;
+
             cursor: pointer;
         }
 
@@ -104,25 +113,32 @@
         SELECIONE O SISTEMA
     </div>
 
+
     <a
         class="button piramide"
         href="#"
-        onclick="abrirSistema('http://checklist.id-logistics.com.br/')"
+        onclick="escolherSistema('piramide')"
     >
         PIRÂMIDE DE SEGURANÇA
     </a>
 
+
     <a
         class="button equality"
         href="#"
-        onclick="abrirSistema('https://e-quality.id-logistics.com.br/index.php')"
+        onclick="escolherSistema('equality')"
     >
         E-QUALITY
     </a>
 
-    <div id="loading" class="loading">
-        Abrindo sistema...
+
+    <div
+        id="loading"
+        class="loading"
+    >
+        Preparando sistema...
     </div>
+
 
     <div class="footer">
         Selecione uma opção para continuar
@@ -133,72 +149,205 @@
 
 <script>
 
-function abrirSistema(url) {
 
-    document.getElementById("loading").style.display = "block";
+/*
+ * URLs dos sistemas
+ */
+
+const PIRAMIDE =
+    "http://checklist.id-logistics.com.br/";
+
+const EQUALITY =
+    "https://e-quality.id-logistics.com.br/index.php";
+
+
+/*
+ * Chave usada para guardar temporariamente
+ * o sistema escolhido.
+ */
+
+const CHAVE =
+    "sistema_para_abrir";
+
+
+/*
+ * Quando o usuário escolhe um sistema.
+ */
+
+function escolherSistema(sistema) {
+
+    const loading =
+        document.getElementById("loading");
+
+    loading.style.display = "block";
 
 
     /*
-     * Cria um identificador único a cada clique.
+     * Guarda a escolha.
      */
 
-    const novoParametro =
-        "_nova_sessao=" +
-        Date.now();
+    try {
 
+        localStorage.setItem(
+            CHAVE,
+            sistema
+        );
 
-    /*
-     * Verifica se a URL já possui ?
-     */
+    } catch (erro) {
 
-    let separador = "?";
+        console.log(
+            "Erro ao salvar escolha:",
+            erro
+        );
 
-    if (url.includes("?")) {
-        separador = "&";
     }
 
 
     /*
-     * Cria uma URL completamente nova.
-     */
-
-    const novaUrl =
-        url +
-        separador +
-        novoParametro;
-
-
-    /*
-     * Tenta limpar somente o histórico
-     * antes da nova navegação.
+     * Se o Fully possui loadStartUrl(),
+     * mandamos ele carregar novamente
+     * a Start URL.
      */
 
     if (
         typeof fully !== "undefined" &&
-        typeof fully.clearHistory === "function"
+        typeof fully.loadStartUrl === "function"
     ) {
 
         try {
-            fully.clearHistory();
-        } catch (e) {
-            console.log(e);
+
+            fully.loadStartUrl();
+
+            return;
+
+        } catch (erro) {
+
+            console.log(
+                "loadStartUrl falhou:",
+                erro
+            );
+
         }
 
     }
 
 
     /*
-     * Pequeno atraso para o WebView processar
-     * a mudança antes de navegar.
+     * Fallback caso a API do Fully
+     * não esteja disponível.
+     */
+
+    abrirSistemaEscolhido();
+
+}
+
+
+/*
+ * Essa função é executada quando
+ * o GitHub Pages carrega novamente.
+ */
+
+function abrirSistemaEscolhido() {
+
+    let sistema = null;
+
+
+    try {
+
+        sistema =
+            localStorage.getItem(CHAVE);
+
+    } catch (erro) {
+
+        console.log(
+            "Erro lendo escolha:",
+            erro
+        );
+
+    }
+
+
+    /*
+     * Não existe sistema pendente.
+     * Então permanece na tela inicial.
+     */
+
+    if (!sistema) {
+        return;
+    }
+
+
+    /*
+     * IMPORTANTE:
+     *
+     * Apaga a escolha ANTES de abrir
+     * o sistema para impedir loop.
+     */
+
+    try {
+
+        localStorage.removeItem(CHAVE);
+
+    } catch (erro) {
+
+        console.log(
+            "Erro removendo escolha:",
+            erro
+        );
+
+    }
+
+
+    let destino = null;
+
+
+    if (sistema === "piramide") {
+
+        destino = PIRAMIDE;
+
+    }
+
+
+    if (sistema === "equality") {
+
+        destino = EQUALITY;
+
+    }
+
+
+    if (!destino) {
+        return;
+    }
+
+
+    /*
+     * Pequena espera para o WebView
+     * terminar de carregar a página.
      */
 
     setTimeout(function() {
 
-        window.location.replace(novaUrl);
+        window.location.replace(destino);
 
     }, 100);
 
 }
+
+
+/*
+ * Executa quando a página termina
+ * de carregar.
+ */
+
+window.addEventListener(
+    "load",
+    function() {
+
+        abrirSistemaEscolhido();
+
+    }
+);
+
 
 </script>
 
