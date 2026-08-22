@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width,
+                   initial-scale=1.0,
+                   maximum-scale=1.0,
+                   user-scalable=no">
+
+    <title>Selecione o Sistema</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html,
+        body {
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f2f4f7;
+            overflow: hidden;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            width: 92vw;
+            max-width: 700px;
+            text-align: center;
+        }
+
+        .title {
+            font-size: 42px;
+            font-weight: bold;
+            color: #1f2937;
+            margin-bottom: 40px;
+        }
+
+        .button {
+            display: flex;
+
+            width: 100%;
+            min-height: 120px;
+
+            margin: 20px 0;
+
+            border: none;
+            border-radius: 18px;
+
+            font-size: 32px;
+            font-weight: bold;
+
+            color: white;
+
+            align-items: center;
+            justify-content: center;
+
+            text-decoration: none;
+
+            box-shadow: 0 5px 14px rgba(0,0,0,0.18);
+
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        .button:active {
+            transform: scale(0.97);
+        }
+
+        .piramide {
+            background: #1f5f99;
+        }
+
+        .equality {
+            background: #248a55;
+        }
+
+        .footer {
+            margin-top: 30px;
+            font-size: 15px;
+            color: #6b7280;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="title">
+            SELECIONE O SISTEMA
+        </div>
+
+        <a
+            class="button piramide"
+            href="http://checklist.id-logistics.com.br/"
+        >
+            PIRÂMIDE DE SEGURANÇA
+        </a>
+
+        <a
+            class="button equality"
+            href="https://e-quality.id-logistics.com.br/index.php"
+        >
+            E-QUALITY
+        </a>
+
+        <div class="footer">
+            Selecione uma opção para continuar
+        </div>
+
+    </div>
+
+</body>
+
+</html>
