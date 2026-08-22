@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 
 <head>
+
     <meta charset="UTF-8">
 
     <meta name="viewport"
@@ -50,33 +51,20 @@
 
         .button {
             display: flex;
-
             width: 100%;
             min-height: 120px;
-
             margin: 20px 0;
-
             border: none;
             border-radius: 18px;
-
             font-size: 32px;
             font-weight: bold;
-
             color: white;
-
             align-items: center;
             justify-content: center;
-
             text-decoration: none;
-
             box-shadow: 0 5px 14px rgba(0,0,0,0.18);
-
-            -webkit-user-select: none;
             user-select: none;
-
             cursor: pointer;
-
-            transition: transform 0.05s;
         }
 
         .button:active {
@@ -109,9 +97,6 @@
         SELECIONE O SISTEMA
     </div>
 
-
-    <!-- PIRÂMIDE -->
-
     <a
         class="button piramide"
         href="#"
@@ -120,9 +105,6 @@
         PIRÂMIDE DE SEGURANÇA
     </a>
 
-
-    <!-- E-QUALITY -->
-
     <a
         class="button equality"
         href="#"
@@ -130,7 +112,6 @@
     >
         E-QUALITY
     </a>
-
 
     <div class="footer">
         Selecione uma opção para continuar
@@ -141,71 +122,54 @@
 
 <script>
 
+const PIRAMIDE =
+    "http://checklist.id-logistics.com.br/";
+
+const EQUALITY =
+    "https://e-quality.id-logistics.com.br/index.php";
+
+const MENU =
+    "https://aquilasantos.github.io/SEU-REPOSITORIO/menu.html";
+
+
+function abrirSistema(sistema) {
+
+    let destino;
+
+    if (sistema === "piramide") {
+
+        destino = PIRAMIDE;
+
+    } else {
+
+        destino = EQUALITY;
+
+    }
+
+
     /*
-     * URLs DOS SISTEMAS
+     * GUARDA O DESTINO NA URL DO MENU.
      */
 
-    const PIRAMIDE =
-        "http://checklist.id-logistics.com.br/";
-
-    const EQUALITY =
-        "https://e-quality.id-logistics.com.br/index.php";
-
-
-    /*
-     * CHAVE PARA GUARDAR TEMPORARIAMENTE
-     * O SISTEMA ESCOLHIDO
-     */
-
-    const CHAVE =
-        "sistemaEscolhido";
+    const menuComDestino =
+        MENU +
+        "?sistema=" +
+        encodeURIComponent(sistema);
 
 
     /*
-     * QUANDO CLICAR EM UM SISTEMA
+     * PRIMEIRO VAI PARA O MENU COM O DESTINO.
      */
 
-    function abrirSistema(sistema) {
-
-        let destino;
+    window.location.href = menuComDestino;
 
 
-        if (sistema === "piramide") {
+    /*
+     * PEQUENO TEMPO PARA A URL SER PROCESSADA
+     * ANTES DO RESTART.
+     */
 
-            destino = PIRAMIDE;
-
-        } else {
-
-            destino = EQUALITY;
-
-        }
-
-
-        /*
-         * GUARDA O DESTINO ANTES
-         * DE REINICIAR O FULLY
-         */
-
-        try {
-
-            localStorage.setItem(
-                CHAVE,
-                destino
-            );
-
-        } catch (erro) {
-
-            console.log(
-                "Erro ao salvar sistema:",
-                erro
-            );
-
-        }
-
-
-        /*
-         * REINICIA O FULLY
-         */
+    setTimeout(function () {
 
         if (
             typeof fully !== "undefined" &&
@@ -214,90 +178,62 @@
 
             fully.restartApp();
 
+        }
+
+    }, 300);
+
+}
+
+
+/*
+ * VERIFICA SE O FULLY VOLTOU
+ * COM UM SISTEMA SELECIONADO.
+ */
+
+window.addEventListener(
+    "load",
+    function () {
+
+        const parametros =
+            new URLSearchParams(
+                window.location.search
+            );
+
+
+        const sistema =
+            parametros.get("sistema");
+
+
+        /*
+         * SE NÃO TEM SISTEMA,
+         * É O MENU NORMAL.
+         */
+
+        if (!sistema) {
+
             return;
+
         }
 
 
         /*
-         * CASO A INTERFACE DO FULLY
-         * NÃO ESTEJA DISPONÍVEL
+         * ESCOLHE O DESTINO.
          */
 
-        window.location.replace(destino);
+        if (sistema === "piramide") {
 
-    }
-
-
-    /*
-     * QUANDO O FULLY VOLTAR
-     */
-
-    window.addEventListener(
-        "load",
-        function () {
-
-            let destino = null;
-
-
-            /*
-             * RECUPERA O SISTEMA ESCOLHIDO
-             */
-
-            try {
-
-                destino =
-                    localStorage.getItem(CHAVE);
-
-            } catch (erro) {
-
-                console.log(
-                    "Erro ao recuperar sistema:",
-                    erro
-                );
-
-            }
-
-
-            /*
-             * SE NÃO EXISTIR NADA SALVO,
-             * PERMANECE NO MENU
-             */
-
-            if (!destino) {
-
-                return;
-
-            }
-
-
-            /*
-             * APAGA A ESCOLHA ANTES DE ABRIR
-             *
-             * ISSO EVITA LOOP DE REINICIALIZAÇÃO.
-             */
-
-            try {
-
-                localStorage.removeItem(CHAVE);
-
-            } catch (erro) {
-
-                console.log(
-                    "Erro ao remover sistema:",
-                    erro
-                );
-
-            }
-
-
-            /*
-             * ABRE O SISTEMA ESCOLHIDO
-             */
-
-            window.location.replace(destino);
+            window.location.replace(PIRAMIDE);
 
         }
-    );
+
+        else if (sistema === "equality") {
+
+            window.location.replace(EQUALITY);
+
+        }
+
+    }
+);
 
 </script>
 
