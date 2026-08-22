@@ -50,30 +50,20 @@
 
         .button {
             display: flex;
-
             width: 100%;
             min-height: 120px;
-
             margin: 20px 0;
-
             border: none;
             border-radius: 18px;
-
             font-size: 32px;
             font-weight: bold;
-
             color: white;
-
             align-items: center;
             justify-content: center;
-
             text-decoration: none;
-
             box-shadow: 0 5px 14px rgba(0,0,0,0.18);
-
             -webkit-user-select: none;
             user-select: none;
-
             cursor: pointer;
         }
 
@@ -109,222 +99,128 @@
 
 <body>
 
-    <div class="container">
+<div class="container">
 
-        <div class="title">
-            SELECIONE O SISTEMA
-        </div>
-
-        <a
-            class="button piramide"
-            href="http://checklist.id-logistics.com.br/"
-            onclick="abrirSistema(event, 'piramide')"
-        >
-            PIRÂMIDE DE SEGURANÇA
-        </a>
-
-        <a
-            class="button equality"
-            href="https://e-quality.id-logistics.com.br/index.php"
-            onclick="abrirSistema(event, 'equality')"
-        >
-            E-QUALITY
-        </a>
-
-        <div id="loading" class="loading">
-            Preparando sistema...
-        </div>
-
-        <div class="footer">
-            Selecione uma opção para continuar
-        </div>
-
+    <div class="title">
+        SELECIONE O SISTEMA
     </div>
 
+    <a
+        class="button piramide"
+        href="http://checklist.id-logistics.com.br/"
+        onclick="abrirSistema(event, 'http://checklist.id-logistics.com.br/')"
+    >
+        PIRÂMIDE DE SEGURANÇA
+    </a>
 
-    <script>
+    <a
+        class="button equality"
+        href="https://e-quality.id-logistics.com.br/index.php"
+        onclick="abrirSistema(event, 'https://e-quality.id-logistics.com.br/index.php')"
+    >
+        E-QUALITY
+    </a>
 
-        const PIRAMIDE =
-            "http://checklist.id-logistics.com.br/";
+    <div id="loading" class="loading">
+        Abrindo sistema...
+    </div>
 
-        const EQUALITY =
-            "https://e-quality.id-logistics.com.br/index.php";
+    <div class="footer">
+        Selecione uma opção para continuar
+    </div>
 
-
-        function abrirSistema(event, sistema) {
-
-            event.preventDefault();
-
-            const loading =
-                document.getElementById("loading");
-
-            loading.style.display = "block";
-
-
-            let destino = "";
-
-            if (sistema === "piramide") {
-                destino = PIRAMIDE;
-            }
-
-            if (sistema === "equality") {
-                destino = EQUALITY;
-            }
+</div>
 
 
-            /*
-             * Guarda somente qual sistema
-             * o usuário escolheu.
-             */
+<script>
 
-            try {
-                localStorage.setItem(
-                    "sistemaEscolhido",
-                    sistema
-                );
+function abrirSistema(event, url) {
 
-                localStorage.setItem(
-                    "destinoSistema",
-                    destino
-                );
+    event.preventDefault();
 
-            } catch (erro) {
+    document.getElementById("loading").style.display = "block";
 
-                console.log(
-                    "Não foi possível salvar a escolha:",
-                    erro
-                );
 
-            }
+    /*
+     * Verifica se a API JavaScript
+     * do Fully está disponível.
+     */
 
+    if (
+        typeof fully !== "undefined" &&
+        typeof fully.clearHistory === "function" &&
+        typeof fully.loadUrlInNewTab === "function"
+    ) {
+
+        try {
 
             /*
-             * Se o Fully disponibilizar
-             * restartApp(), tentamos reiniciar
-             * o aplicativo.
+             * 1 - Limpa o histórico
              */
 
-            if (
-                typeof fully !== "undefined" &&
-                typeof fully.restartApp === "function"
-            ) {
+            fully.clearHistory();
 
-                try {
+        } catch (erro) {
 
-                    fully.restartApp();
-
-                    return;
-
-                } catch (erro) {
-
-                    console.log(
-                        "restartApp não funcionou:",
-                        erro
-                    );
-
-                }
-
-            }
-
-
-            /*
-             * Caso restartApp não esteja disponível,
-             * abrimos normalmente o sistema.
-             */
-
-            setTimeout(function () {
-
-                window.location.href = destino;
-
-            }, 500);
+            console.log(
+                "Erro ao limpar histórico:",
+                erro
+            );
 
         }
 
 
         /*
-         * Quando o GitHub Pages abrir novamente,
-         * verifica se existe uma escolha pendente.
+         * Pequena espera para o Fully
+         * processar a limpeza.
          */
 
-        window.addEventListener(
-            "load",
-            function () {
+        setTimeout(function() {
 
-                let sistema = null;
-
-                let destino = null;
-
-
-                try {
-
-                    sistema =
-                        localStorage.getItem(
-                            "sistemaEscolhido"
-                        );
-
-                    destino =
-                        localStorage.getItem(
-                            "destinoSistema"
-                        );
-
-                } catch (erro) {
-
-                    console.log(
-                        "Erro ao ler escolha:",
-                        erro
-                    );
-
-                }
-
+            try {
 
                 /*
-                 * Se existe uma escolha pendente,
-                 * abre o sistema.
+                 * 2 - Abre o sistema em
+                 * uma NOVA ABA do Fully.
                  */
 
-                if (
-                    sistema &&
-                    destino
-                ) {
+                fully.loadUrlInNewTab(
+                    url,
+                    true
+                );
 
-                    /*
-                     * Remove primeiro para evitar
-                     * loop infinito após o restart.
-                     */
+            } catch (erro) {
 
-                    try {
+                console.log(
+                    "Erro ao abrir nova aba:",
+                    erro
+                );
 
-                        localStorage.removeItem(
-                            "sistemaEscolhido"
-                        );
+                /*
+                 * Fallback
+                 */
 
-                        localStorage.removeItem(
-                            "destinoSistema"
-                        );
-
-                    } catch (erro) {
-
-                        console.log(
-                            "Erro ao limpar escolha:",
-                            erro
-                        );
-
-                    }
-
-
-                    setTimeout(function () {
-
-                        window.location.href =
-                            destino;
-
-                    }, 1000);
-
-                }
+                window.location.href = url;
 
             }
-        );
 
-    </script>
+        }, 150);
+
+
+        return;
+    }
+
+
+    /*
+     * Se a API não estiver disponível,
+     * abre normalmente.
+     */
+
+    window.location.href = url;
+
+}
+
+</script>
 
 </body>
 
