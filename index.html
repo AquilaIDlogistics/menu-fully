@@ -62,7 +62,6 @@
             justify-content: center;
             text-decoration: none;
             box-shadow: 0 5px 14px rgba(0,0,0,0.18);
-            -webkit-user-select: none;
             user-select: none;
             cursor: pointer;
         }
@@ -107,16 +106,16 @@
 
     <a
         class="button piramide"
-        href="http://checklist.id-logistics.com.br/"
-        onclick="abrirSistema(event, 'http://checklist.id-logistics.com.br/')"
+        href="#"
+        onclick="abrirSistema('http://checklist.id-logistics.com.br/')"
     >
         PIRÂMIDE DE SEGURANÇA
     </a>
 
     <a
         class="button equality"
-        href="https://e-quality.id-logistics.com.br/index.php"
-        onclick="abrirSistema(event, 'https://e-quality.id-logistics.com.br/index.php')"
+        href="#"
+        onclick="abrirSistema('https://e-quality.id-logistics.com.br/index.php')"
     >
         E-QUALITY
     </a>
@@ -134,89 +133,70 @@
 
 <script>
 
-function abrirSistema(event, url) {
-
-    event.preventDefault();
+function abrirSistema(url) {
 
     document.getElementById("loading").style.display = "block";
 
 
     /*
-     * Verifica se a API JavaScript
-     * do Fully está disponível.
+     * Cria um identificador único a cada clique.
      */
 
-    if (
-        typeof fully !== "undefined" &&
-        typeof fully.clearHistory === "function" &&
-        typeof fully.loadUrlInNewTab === "function"
-    ) {
-
-        try {
-
-            /*
-             * 1 - Limpa o histórico
-             */
-
-            fully.clearHistory();
-
-        } catch (erro) {
-
-            console.log(
-                "Erro ao limpar histórico:",
-                erro
-            );
-
-        }
+    const novoParametro =
+        "_nova_sessao=" +
+        Date.now();
 
 
-        /*
-         * Pequena espera para o Fully
-         * processar a limpeza.
-         */
+    /*
+     * Verifica se a URL já possui ?
+     */
 
-        setTimeout(function() {
+    let separador = "?";
 
-            try {
-
-                /*
-                 * 2 - Abre o sistema em
-                 * uma NOVA ABA do Fully.
-                 */
-
-                fully.loadUrlInNewTab(
-                    url,
-                    true
-                );
-
-            } catch (erro) {
-
-                console.log(
-                    "Erro ao abrir nova aba:",
-                    erro
-                );
-
-                /*
-                 * Fallback
-                 */
-
-                window.location.href = url;
-
-            }
-
-        }, 150);
-
-
-        return;
+    if (url.includes("?")) {
+        separador = "&";
     }
 
 
     /*
-     * Se a API não estiver disponível,
-     * abre normalmente.
+     * Cria uma URL completamente nova.
      */
 
-    window.location.href = url;
+    const novaUrl =
+        url +
+        separador +
+        novoParametro;
+
+
+    /*
+     * Tenta limpar somente o histórico
+     * antes da nova navegação.
+     */
+
+    if (
+        typeof fully !== "undefined" &&
+        typeof fully.clearHistory === "function"
+    ) {
+
+        try {
+            fully.clearHistory();
+        } catch (e) {
+            console.log(e);
+        }
+
+    }
+
+
+    /*
+     * Pequeno atraso para o WebView processar
+     * a mudança antes de navegar.
+     */
+
+    setTimeout(function() {
+
+        window.location.replace(novaUrl);
+
+    }, 100);
 
 }
 
