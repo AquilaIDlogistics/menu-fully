@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Abrindo sistema...</title>
+
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background: #ffffff;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .texto {
+            font-size: 18px;
+            color: #555;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="texto">
+        Abrindo sistema...
+    </div>
+
+    <script>
+
+        // ========================================================
+        // PEGA O SISTEMA QUE DEVE SER ABERTO
+        // ========================================================
+
+        const parametros =
+            new URLSearchParams(window.location.search);
+
+        const sistema =
+            parametros.get("sistema");
+
+
+        // ========================================================
+        // DESTINOS
+        // ========================================================
+
+        const destinos = {
+
+            piramide:
+                "https://checklist.id-logistics.com.br/",
+
+            equality:
+                "https://e-quality.id-logistics.com.br/index.php"
+
+        };
+
+
+        // ========================================================
+        // ABRE O SISTEMA DEPOIS DE UMA PEQUENA PAUSA
+        // ========================================================
+
+        setTimeout(function () {
+
+            if (sistema === "piramide") {
+
+                window.location.replace(
+                    destinos.piramide
+                );
+
+            } else if (sistema === "equality") {
+
+                window.location.replace(
+                    destinos.equality
+                );
+
+            } else {
+
+                window.location.replace(
+                    "./"
+                );
+
+            }
+
+        }, 800);
+
+    </script>
+
+</body>
+
+</html>
