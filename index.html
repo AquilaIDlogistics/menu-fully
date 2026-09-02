@@ -91,6 +91,10 @@
         </h1>
 
 
+        <!-- =====================================================
+             PIRÂMIDE
+             ===================================================== -->
+
         <button
             class="botao piramide"
             onclick="abrirPiramide()"
@@ -98,6 +102,10 @@
             PIRÂMIDE
         </button>
 
+
+        <!-- =====================================================
+             E-QUALITY
+             ===================================================== -->
 
         <button
             class="botao equality"
@@ -112,13 +120,23 @@
     <script>
 
         // ========================================================
+        // URL DO LIMPAR.HTML
+        // ========================================================
+
+        const LIMPAR_URL =
+            "https://aquilaidlogistics.github.io/menu-fully/limpar.html";
+
+
+        // ========================================================
         // PIRÂMIDE
         // ========================================================
 
         function abrirPiramide() {
 
+            console.log("Abrindo Pirâmide através do limpar.html");
+
             window.location.href =
-                "https://checklist.id-logistics.com.br/";
+                LIMPAR_URL + "?sistema=piramide";
 
         }
 
@@ -129,8 +147,10 @@
 
         function abrirEquality() {
 
+            console.log("Abrindo E-Quality através do limpar.html");
+
             window.location.href =
-                "https://e-quality.id-logistics.com.br/index.php";
+                LIMPAR_URL + "?sistema=equality";
 
         }
 
