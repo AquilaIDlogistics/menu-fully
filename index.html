@@ -1,100 +1,103 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
 
 <head>
 
-    <meta charset="UTF-8">
+```
+<meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width,
-                   initial-scale=1.0,
-                   maximum-scale=1.0,
-                   user-scalable=no">
+<meta name="viewport"
+      content="width=device-width,
+               initial-scale=1.0,
+               maximum-scale=1.0,
+               user-scalable=no">
 
-    <title>Selecione o Sistema</title>
+<title>Selecione o Sistema</title>
 
-    <style>
+<style>
 
-        * {
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
+    * {
+        box-sizing: border-box;
+        -webkit-tap-highlight-color: transparent;
+    }
 
-        html,
-        body {
-            margin: 0;
-            width: 100%;
-            height: 100%;
-            font-family: Arial, Helvetica, sans-serif;
-            background: #f2f4f7;
-            overflow: hidden;
-        }
+    html,
+    body {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        font-family: Arial, Helvetica, sans-serif;
+        background: #f2f4f7;
+        overflow: hidden;
+    }
 
-        body {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 
-        .container {
-            width: 92vw;
-            max-width: 700px;
-            text-align: center;
-        }
+    .container {
+        width: 92vw;
+        max-width: 700px;
+        text-align: center;
+    }
 
-        .title {
-            font-size: 42px;
-            font-weight: bold;
-            color: #1f2937;
-            margin-bottom: 40px;
-        }
+    .title {
+        font-size: 42px;
+        font-weight: bold;
+        color: #1f2937;
+        margin-bottom: 40px;
+    }
 
-        .button {
-            display: flex;
-            width: 100%;
-            min-height: 120px;
-            margin: 20px 0;
+    .button {
+        display: flex;
+        width: 100%;
+        min-height: 120px;
+        margin: 20px 0;
 
-            border: none;
-            border-radius: 18px;
+        border: none;
+        border-radius: 18px;
 
-            font-size: 32px;
-            font-weight: bold;
+        font-size: 32px;
+        font-weight: bold;
 
-            color: white;
+        color: white;
 
-            align-items: center;
-            justify-content: center;
+        align-items: center;
+        justify-content: center;
 
-            text-decoration: none;
+        text-decoration: none;
 
-            box-shadow: 0 5px 14px rgba(0,0,0,0.18);
+        box-shadow: 0 5px 14px rgba(0,0,0,0.18);
 
-            -webkit-user-select: none;
-            user-select: none;
+        -webkit-user-select: none;
+        user-select: none;
 
-            cursor: pointer;
-        }
+        cursor: pointer;
+    }
 
-        .button:active {
-            transform: scale(0.97);
-        }
+    .button:active {
+        transform: scale(0.97);
+    }
 
-        .piramide {
-            background: #1f5f99;
-        }
+    .piramide {
+        background: #1f5f99;
+    }
 
-        .equality {
-            background: #248a55;
-        }
+    .equality {
+        background: #248a55;
+    }
 
-        .footer {
-            margin-top: 30px;
-            font-size: 15px;
-            color: #6b7280;
-        }
+    .footer {
+        margin-top: 30px;
+        font-size: 15px;
+        color: #6b7280;
+    }
 
-    </style>
+</style>
+```
 
 </head>
 
@@ -102,258 +105,34 @@
 
 <div class="container">
 
-    <div class="title">
-        SELECIONE O SISTEMA
-    </div>
-
-
-    <a
-        class="button piramide"
-        href="#"
-        onclick="abrirPiramide(); return false;"
-    >
-        PIRÂMIDE DE SEGURANÇA
-    </a>
-
-
-    <a
-        class="button equality"
-        href="#"
-        onclick="abrirEquality(); return false;"
-    >
-        E-QUALITY
-    </a>
-
-
-    <div class="footer">
-        Selecione uma opção para continuar
-    </div>
-
+```
+<div class="title">
+    SELECIONE O SISTEMA
 </div>
 
 
-<script>
-
-    /*
-     * ==========================================================
-     * URLs
-     * ==========================================================
-     */
-
-    const URL_PIRAMIDE =
-        "http://checklist.id-logistics.com.br/";
-
-    const URL_EQUALITY =
-        "https://e-quality.id-logistics.com.br/index.php";
-
-
-    /*
-     * ==========================================================
-     * CHAVE
-     * ==========================================================
-     */
-
-    const CHAVE_SISTEMA =
-        "FULLY_SISTEMA_ESCOLHIDO";
-
-
-    /*
-     * ==========================================================
-     * ABRIR PIRÂMIDE
-     * ==========================================================
-     */
-
-    function abrirPiramide() {
-
-        console.log(
-            "Usuário escolheu PIRÂMIDE"
-        );
-
-        try {
-
-            localStorage.setItem(
-                CHAVE_SISTEMA,
-                URL_PIRAMIDE
-            );
-
-        } catch (e) {
-
-            console.log(
-                "Não foi possível salvar:",
-                e
-            );
-
-        }
-
-
-        reiniciarFully();
-
-    }
-
-
-    /*
-     * ==========================================================
-     * ABRIR E-QUALITY
-     * ==========================================================
-     */
-
-    function abrirEquality() {
-
-        console.log(
-            "Usuário escolheu E-QUALITY"
-        );
-
-        try {
-
-            localStorage.setItem(
-                CHAVE_SISTEMA,
-                URL_EQUALITY
-            );
-
-        } catch (e) {
-
-            console.log(
-                "Não foi possível salvar:",
-                e
-            );
-
-        }
-
-
-        reiniciarFully();
-
-    }
-
-
-    /*
-     * ==========================================================
-     * REINICIAR FULLY
-     * ==========================================================
-     */
-
-    function reiniciarFully() {
-
-        console.log(
-            "Reiniciando Fully..."
-        );
-
-
-        if (
-            typeof fully !== "undefined" &&
-            typeof fully.restartApp === "function"
-        ) {
-
-            fully.restartApp();
-
-            return;
-
-        }
-
-
-        /*
-         * Se a API do Fully não estiver disponível,
-         * não tenta inventar outro método.
-         */
-
-        console.log(
-            "API restartApp do Fully não encontrada."
-        );
-
-    }
-
-
-    /*
-     * ==========================================================
-     * QUANDO O MENU FOR ABERTO NOVAMENTE
-     * ==========================================================
-     */
-
-    window.addEventListener(
-        "load",
-        function () {
-
-            let destino = null;
-
-
-            try {
-
-                destino =
-                    localStorage.getItem(
-                        CHAVE_SISTEMA
-                    );
-
-            } catch (e) {
-
-                console.log(
-                    "Erro ao ler sistema:",
-                    e
-                );
-
-            }
-
-
-            /*
-             * Nenhum sistema aguardando.
-             * Continua no menu normalmente.
-             */
-
-            if (!destino) {
-
-                return;
-
-            }
-
-
-            console.log(
-                "Sistema escolhido encontrado:",
-                destino
-            );
-
-
-            /*
-             * APAGA A ESCOLHA ANTES DE ABRIR.
-             *
-             * Isso é MUITO importante.
-             * Evita que o Fully entre em um loop
-             * infinito de reinicialização.
-             */
-
-            try {
-
-                localStorage.removeItem(
-                    CHAVE_SISTEMA
-                );
-
-            } catch (e) {
-
-                console.log(
-                    "Erro ao apagar escolha:",
-                    e
-                );
-
-            }
-
-
-            /*
-             * Pequena espera apenas para garantir
-             * que o menu terminou de carregar.
-             */
-
-            setTimeout(
-                function () {
-
-                    window.location.replace(
-                        destino
-                    );
-
-                },
-                150
-            );
-
-        }
-    );
-
-</script>
+<a
+    class="button piramide"
+    href="http://checklist.id-logistics.com.br/"
+>
+    PIRÂMIDE DE SEGURANÇA
+</a>
+
+
+<a
+    class="button equality"
+    href="https://e-quality.id-logistics.com.br/index.php"
+>
+    E-QUALITY
+</a>
+
+
+<div class="footer">
+    Selecione uma opção para continuar
+</div>
+```
+
+</div>
 
 </body>
 
