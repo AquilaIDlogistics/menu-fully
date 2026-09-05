@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -6,191 +5,2780 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>ID LOGISTICS - Seleção de Sistema</title>
+    <title>Futebol ID</title>
 
     <style>
+
         * {
             box-sizing: border-box;
         }
 
-        html,
         body {
             margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
             font-family: Arial, Helvetica, sans-serif;
+            background: #f3f5f9;
+            color: #172033;
         }
 
-        body {
+        /* =========================
+           HEADER
+        ========================= */
+
+        header {
+            background: #071d49;
+            color: white;
+            padding: 18px 25px;
+
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
 
-            background: linear-gradient(
-                135deg,
-                #0057B8 0%,
-                #007BFF 50%,
-                #EAF4FF 100%
-            );
-        }
-
-        .container {
-            width: 90%;
-            max-width: 550px;
-
-            background: #ffffff;
-
-            padding: 40px 30px;
-
-            border-radius: 20px;
-
-            box-shadow:
-                0 15px 40px rgba(0, 0, 0, 0.20);
-
-            text-align: center;
+            box-shadow: 0 3px 12px rgba(0,0,0,.15);
         }
 
         .logo {
-            font-size: 36px;
+            font-size: 25px;
             font-weight: bold;
-            color: #0057B8;
-            margin-bottom: 5px;
         }
 
-        .subtitulo {
-            color: #666;
-            font-size: 16px;
-            margin-bottom: 35px;
+        .usuario-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
-        h1 {
-            font-size: 28px;
-            color: #1A1A1A;
-            margin-bottom: 30px;
+        /* =========================
+           PRINCIPAL
+        ========================= */
+
+        main {
+            max-width: 1200px;
+            margin: auto;
+            padding: 25px;
         }
 
-        .botao {
-            width: 100%;
-            height: 75px;
+        h1,
+        h2,
+        h3 {
+            color: #071d49;
+        }
 
+        /* =========================
+           CARDS
+        ========================= */
+
+        .card {
+            background: white;
+            border-radius: 14px;
+            padding: 22px;
             margin-bottom: 20px;
 
-            border: none;
-            border-radius: 14px;
+            box-shadow: 0 5px 20px rgba(0,0,0,.08);
+        }
 
-            font-size: 22px;
+        .grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(240px, 1fr));
+
+            gap: 18px;
+        }
+
+        /* =========================
+           BOTÕES
+        ========================= */
+
+        button {
+            border: none;
+            border-radius: 8px;
+
+            padding: 12px 16px;
+
+            background: #071d49;
+            color: white;
+
+            font-size: 15px;
             font-weight: bold;
 
             cursor: pointer;
 
-            transition: all .25s ease;
-
-            box-shadow:
-                0 5px 15px rgba(0, 0, 0, .15);
+            margin: 5px 0;
         }
 
-        .piramide {
-            background: #0057B8;
+        button:hover {
+            background: #0d347d;
+        }
+
+        .btn-danger {
+            background: #c62828;
+        }
+
+        .btn-danger:hover {
+            background: #a91f1f;
+        }
+
+        .btn-success {
+            background: #16834b;
+        }
+
+        .btn-success:hover {
+            background: #0f693b;
+        }
+
+        .btn-secondary {
+            background: #e8edf5;
+            color: #071d49;
+        }
+
+        .btn-secondary:hover {
+            background: #dce4f0;
+        }
+
+        /* =========================
+           INPUTS
+        ========================= */
+
+        input,
+        select {
+            width: 100%;
+
+            padding: 12px;
+
+            margin: 7px 0 14px;
+
+            border: 1px solid #ccd3df;
+
+            border-radius: 8px;
+
+            font-size: 15px;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+        }
+
+        /* =========================
+           LOGIN
+        ========================= */
+
+        .login-area {
+            width: 100%;
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 20px;
+        }
+
+        .login-box {
+            width: 100%;
+            max-width: 430px;
+        }
+
+        .logo-login {
+            text-align: center;
+
+            font-size: 36px;
+
+            font-weight: bold;
+
+            color: #071d49;
+
+            margin-bottom: 25px;
+        }
+
+        .login-subtitulo {
+            text-align: center;
+
+            color: #667085;
+
+            margin-bottom: 25px;
+        }
+
+        .login-box button {
+            width: 100%;
+        }
+
+        /* =========================
+           MENU
+        ========================= */
+
+        .menu {
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 8px;
+
+            margin-bottom: 20px;
+        }
+
+        .menu button {
+            flex: 1;
+
+            min-width: 140px;
+        }
+
+        /* =========================
+           TABELAS
+        ========================= */
+
+        table {
+            width: 100%;
+
+            border-collapse: collapse;
+
+            margin-top: 15px;
+        }
+
+        th,
+        td {
+            padding: 11px;
+
+            border-bottom: 1px solid #e5e7eb;
+
+            text-align: left;
+        }
+
+        th {
+            background: #071d49;
             color: white;
         }
 
-        .equality {
-            background: white;
-            color: #0057B8;
-            border: 3px solid #0057B8;
+        /* =========================
+           UTILIDADES
+        ========================= */
+
+        .hidden {
+            display: none !important;
         }
 
-        .botao:hover {
-            transform: translateY(-3px);
-            box-shadow:
-                0 10px 20px rgba(0, 0, 0, .20);
+        .alert {
+            padding: 13px;
+
+            border-radius: 8px;
+
+            margin-bottom: 15px;
+
+            background: #eef3fa;
         }
 
-        .botao:active {
-            transform: scale(0.98);
+        .jogador-card {
+            border: 1px solid #e1e5ec;
+
+            border-radius: 10px;
+
+            padding: 15px;
+
+            margin-bottom: 10px;
         }
 
-        .rodape {
-            margin-top: 20px;
-            color: #888;
-            font-size: 13px;
+        .nota {
+            font-size: 25px;
+
+            font-weight: bold;
+
+            color: #071d49;
         }
+
+        .ranking-posicao {
+            font-size: 28px;
+
+            font-weight: bold;
+        }
+
+        .status-online {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 7px;
+        }
+
+        .bolinha {
+            width: 10px;
+            height: 10px;
+
+            background: #20c76a;
+
+            border-radius: 50%;
+
+            display: inline-block;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media(max-width:650px) {
+
+            main {
+                padding: 15px;
+            }
+
+            header {
+                padding: 14px;
+            }
+
+            .logo {
+                font-size: 20px;
+            }
+
+            .usuario-header {
+                font-size: 13px;
+            }
+
+            table {
+                font-size: 13px;
+            }
+
+            .logo-login {
+                font-size: 30px;
+            }
+
+        }
+
     </style>
+
 </head>
+
 
 <body>
 
-    <div class="container">
 
-        <div class="logo">
-            ID LOGISTICS
+<!-- ==================================================
+     LOGIN
+================================================== -->
+
+<section id="telaLogin" class="login-area">
+
+    <div class="login-box">
+
+        <div class="logo-login">
+            ⚽ Futebol ID
         </div>
 
-        <div class="subtitulo">
-            Portal de Sistemas
+        <div class="login-subtitulo">
+            Sistema de gerenciamento de futebol
         </div>
 
-        <h1>
-            Selecione o sistema
-        </h1>
+        <div class="card">
 
-        <button
-            class="botao piramide"
-            onclick="abrirPiramide()">
-            PIRÂMIDE
-        </button>
+            <h2>Entrar</h2>
 
-        <button
-            class="botao equality"
-            onclick="abrirEquality()">
-            E-QUALITY
-        </button>
+            <div id="loginMensagem"></div>
 
-        <div class="rodape">
-            ID Logistics Brasil
+            <label>
+                Usuário / E-mail
+            </label>
+
+            <input
+                id="loginUsuario"
+                type="text"
+                placeholder="Digite seu usuário"
+                autocomplete="username"
+            >
+
+            <label>
+                Senha
+            </label>
+
+            <input
+                id="loginSenha"
+                type="password"
+                placeholder="Digite sua senha"
+                autocomplete="current-password"
+            >
+
+            <button onclick="login()">
+                Entrar
+            </button>
+
         </div>
 
     </div>
 
-    <script>
+</section>
 
-        // ========================================================
-        // URL DO LIMPAR.HTML
-        // ========================================================
 
-        const LIMPAR_URL =
-            "https://aquilaidlogistics.github.io/menu-fully/limpar.html";
+<!-- ==================================================
+     CABEÇALHO DO SISTEMA
+================================================== -->
 
-        // ========================================================
-        // PIRÂMIDE
-        // ========================================================
+<header id="topo" class="hidden">
 
-        function abrirPiramide() {
+    <div class="logo">
+        ⚽ Futebol ID
+    </div>
 
-            console.log("Abrindo Pirâmide através do limpar.html");
+    <div class="usuario-header">
 
-            window.location.href =
-                LIMPAR_URL + "?sistema=piramide";
+        <span class="status-online">
+            <span class="bolinha"></span>
+            <span id="usuarioNome"></span>
+        </span>
+
+        <button
+            onclick="logout()"
+            class="btn-secondary"
+        >
+            Sair
+        </button>
+
+    </div>
+
+</header>
+
+
+<!-- ==================================================
+     SISTEMA
+================================================== -->
+
+<main id="sistema" class="hidden">
+
+
+    <!-- MENU -->
+
+    <div class="menu">
+
+        <button onclick="mostrarTela('dashboard')">
+            🏠 Início
+        </button>
+
+        <button onclick="mostrarTela('jogadores')">
+            👥 Jogadores
+        </button>
+
+        <button onclick="mostrarTela('partidas')">
+            ⚽ Partidas
+        </button>
+
+        <button onclick="mostrarTela('escalacao')">
+            📋 Escalação
+        </button>
+
+        <button onclick="mostrarTela('votacao')">
+            ⭐ Votação
+        </button>
+
+        <button onclick="mostrarTela('ranking')">
+            🏆 Ranking
+        </button>
+
+    </div>
+
+
+    <!-- ==================================================
+         DASHBOARD
+    ================================================== -->
+
+    <section
+        id="dashboard"
+        class="tela"
+    >
+
+        <div class="card">
+
+            <h1>
+                Futebol ID
+            </h1>
+
+            <p>
+                Bem-vindo ao sistema de gerenciamento de futebol.
+            </p>
+
+            <div class="grid">
+
+
+                <div class="card">
+
+                    <h3>
+                        👥 Jogadores
+                    </h3>
+
+                    <h2 id="totalJogadores">
+                        0
+                    </h2>
+
+                    <button
+                        onclick="mostrarTela('jogadores')"
+                    >
+                        Ver jogadores
+                    </button>
+
+                </div>
+
+
+                <div class="card">
+
+                    <h3>
+                        ⚽ Partidas
+                    </h3>
+
+                    <h2 id="totalPartidas">
+                        0
+                    </h2>
+
+                    <button
+                        onclick="mostrarTela('partidas')"
+                    >
+                        Ver partidas
+                    </button>
+
+                </div>
+
+
+                <div class="card">
+
+                    <h3>
+                        🏆 Ranking
+                    </h3>
+
+                    <p>
+                        Veja os jogadores mais bem avaliados.
+                    </p>
+
+                    <button
+                        onclick="mostrarTela('ranking')"
+                    >
+                        Abrir ranking
+                    </button>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==================================================
+         JOGADORES
+    ================================================== -->
+
+    <section
+        id="jogadores"
+        class="tela hidden"
+    >
+
+        <div class="card">
+
+            <h1>
+                👥 Jogadores
+            </h1>
+
+            <button
+                onclick="mostrarCadastro()"
+            >
+                + Novo jogador
+            </button>
+
+
+            <!-- FORMULÁRIO -->
+
+            <div
+                id="formJogador"
+                class="hidden"
+            >
+
+                <h3>
+                    Cadastro de jogador
+                </h3>
+
+
+                <label>
+                    Nome
+                </label>
+
+                <input
+                    id="jNome"
+                    placeholder="Nome completo"
+                >
+
+
+                <label>
+                    Apelido
+                </label>
+
+                <input
+                    id="jApelido"
+                    placeholder="Apelido"
+                >
+
+
+                <label>
+                    Posição
+                </label>
+
+                <select id="jPosicao">
+
+                    <option value="">
+                        Selecione
+                    </option>
+
+                    <option value="Goleiro">
+                        Goleiro
+                    </option>
+
+                    <option value="Zagueiro">
+                        Zagueiro
+                    </option>
+
+                    <option value="Lateral">
+                        Lateral
+                    </option>
+
+                    <option value="Volante">
+                        Volante
+                    </option>
+
+                    <option value="Meia">
+                        Meia
+                    </option>
+
+                    <option value="Ponta">
+                        Ponta
+                    </option>
+
+                    <option value="Atacante">
+                        Atacante
+                    </option>
+
+                </select>
+
+
+                <label>
+                    Número
+                </label>
+
+                <input
+                    id="jNumero"
+                    type="number"
+                    placeholder="Número da camisa"
+                >
+
+
+                <label>
+                    E-mail
+                </label>
+
+                <input
+                    id="jEmail"
+                    type="email"
+                    placeholder="E-mail"
+                >
+
+
+                <label>
+                    Senha
+                </label>
+
+                <input
+                    id="jSenha"
+                    type="password"
+                    placeholder="Senha do jogador"
+                >
+
+
+                <button
+                    onclick="cadastrarJogador()"
+                >
+                    Salvar jogador
+                </button>
+
+                <button
+                    class="btn-secondary"
+                    onclick="esconderCadastro()"
+                >
+                    Cancelar
+                </button>
+
+            </div>
+
+
+            <!-- LISTA -->
+
+            <div id="listaJogadores"></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==================================================
+         PARTIDAS
+    ================================================== -->
+
+    <section
+        id="partidas"
+        class="tela hidden"
+    >
+
+        <div class="card">
+
+            <h1>
+                ⚽ Partidas
+            </h1>
+
+            <h3>
+                Nova partida
+            </h3>
+
+
+            <label>
+                Data
+            </label>
+
+            <input
+                id="pData"
+                type="date"
+            >
+
+
+            <label>
+                Hora
+            </label>
+
+            <input
+                id="pHora"
+                type="time"
+            >
+
+
+            <label>
+                Adversário
+            </label>
+
+            <input
+                id="pAdversario"
+                placeholder="Nome do adversário"
+            >
+
+
+            <label>
+                Local
+            </label>
+
+            <input
+                id="pLocal"
+                placeholder="Local da partida"
+            >
+
+
+            <button
+                onclick="criarPartida()"
+            >
+                Criar partida
+            </button>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2>
+                Partidas cadastradas
+            </h2>
+
+            <div id="listaPartidas"></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==================================================
+         ESCALAÇÃO
+    ================================================== -->
+
+    <section
+        id="escalacao"
+        class="tela hidden"
+    >
+
+        <div class="card">
+
+            <h1>
+                📋 Escalação
+            </h1>
+
+
+            <label>
+                Partida
+            </label>
+
+            <select
+                id="selectPartidaEscala"
+                onchange="carregarEscalados()"
+            >
+
+                <option value="">
+                    Selecione uma partida
+                </option>
+
+            </select>
+
+
+            <h3>
+                Adicionar jogador
+            </h3>
+
+
+            <select
+                id="selectJogadorEscala"
+            >
+
+                <option value="">
+                    Selecione um jogador
+                </option>
+
+            </select>
+
+
+            <button
+                onclick="escalarJogador()"
+            >
+                Escalar jogador
+            </button>
+
+
+            <div id="listaEscalados"></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==================================================
+         VOTAÇÃO
+    ================================================== -->
+
+    <section
+        id="votacao"
+        class="tela hidden"
+    >
+
+        <div class="card">
+
+            <h1>
+                ⭐ Votação
+            </h1>
+
+
+            <label>
+                Partida
+            </label>
+
+            <select
+                id="selectPartidaVoto"
+                onchange="carregarVotacao()"
+            >
+
+                <option value="">
+                    Selecione uma partida
+                </option>
+
+            </select>
+
+
+            <div id="painelVotacao"></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==================================================
+         RANKING
+    ================================================== -->
+
+    <section
+        id="ranking"
+        class="tela hidden"
+    >
+
+        <div class="card">
+
+            <h1>
+                🏆 Ranking
+            </h1>
+
+            <button
+                onclick="carregarRanking()"
+            >
+                Atualizar ranking
+            </button>
+
+
+            <div id="listaRanking"></div>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+<!-- ==================================================
+     JAVASCRIPT
+================================================== -->
+
+<script>
+
+
+/*******************************************************
+ * URL DO GOOGLE APPS SCRIPT
+ *******************************************************/
+
+const API_URL =
+"https://script.google.com/macros/s/AKfycbzd-B7jCN_YhM7QOh_cHvad-4icVrTAuMQ_gp2Xx7y95ctNO5258G2-zLfwWWq2C1sN/exec";
+
+
+/*******************************************************
+ * VARIÁVEIS
+ *******************************************************/
+
+let usuario = null;
+
+let jogadores = [];
+
+let partidas = [];
+
+let escalados = [];
+
+
+/*******************************************************
+ * COMUNICAÇÃO COM O APPS SCRIPT
+ *******************************************************/
+
+async function api(
+    acao,
+    parametros = {}
+) {
+
+    const params =
+        new URLSearchParams();
+
+    params.append(
+        "acao",
+        acao
+    );
+
+
+    Object.keys(parametros).forEach(
+        chave => {
+
+            params.append(
+                chave,
+                parametros[chave] ?? ""
+            );
+
+        }
+    );
+
+
+    const resposta =
+        await fetch(
+            API_URL +
+            "?" +
+            params.toString()
+        );
+
+
+    return await resposta.json();
+
+}
+
+
+/*******************************************************
+ * LOGIN
+ *******************************************************/
+
+async function login() {
+
+    const usuarioInput =
+        document
+            .getElementById("loginUsuario")
+            .value
+            .trim();
+
+
+    const senha =
+        document
+            .getElementById("loginSenha")
+            .value;
+
+
+    const mensagem =
+        document
+            .getElementById("loginMensagem");
+
+
+    if (!usuarioInput || !senha) {
+
+        mensagem.innerHTML =
+            `<div class="alert">
+                ⚠️ Informe usuário e senha.
+            </div>`;
+
+        return;
+
+    }
+
+
+    mensagem.innerHTML =
+        `<div class="alert">
+            Entrando no sistema...
+        </div>`;
+
+
+    try {
+
+        const resultado =
+            await api(
+                "login",
+                {
+                    email: usuarioInput,
+                    senha: senha
+                }
+            );
+
+
+        if (!resultado.ok) {
+
+            mensagem.innerHTML =
+                `<div class="alert">
+                    ❌ ${resultado.erro}
+                </div>`;
+
+            return;
 
         }
 
-        // ========================================================
-        // E-QUALITY
-        // ========================================================
 
-        function abrirEquality() {
+        usuario =
+            resultado.jogador;
 
-            console.log("Abrindo E-Quality através do limpar.html");
 
-            window.location.href =
-                LIMPAR_URL + "?sistema=equality";
+        localStorage.setItem(
+            "futebolID_usuario",
+            JSON.stringify(usuario)
+        );
+
+
+        entrarSistema();
+
+
+    } catch (erro) {
+
+        console.error(erro);
+
+
+        mensagem.innerHTML =
+            `<div class="alert">
+                ❌ Não foi possível conectar ao servidor.
+            </div>`;
+
+    }
+
+}
+
+
+/*******************************************************
+ * ENTRAR NO SISTEMA
+ *******************************************************/
+
+function entrarSistema() {
+
+    document
+        .getElementById("telaLogin")
+        .classList.add("hidden");
+
+
+    document
+        .getElementById("topo")
+        .classList.remove("hidden");
+
+
+    document
+        .getElementById("sistema")
+        .classList.remove("hidden");
+
+
+    document
+        .getElementById("usuarioNome")
+        .textContent =
+        usuario.nome;
+
+
+    carregarTudo();
+
+}
+
+
+/*******************************************************
+ * SAIR
+ *******************************************************/
+
+function logout() {
+
+    localStorage.removeItem(
+        "futebolID_usuario"
+    );
+
+
+    location.reload();
+
+}
+
+
+/*******************************************************
+ * MUDAR TELA
+ *******************************************************/
+
+function mostrarTela(id) {
+
+    document
+        .querySelectorAll(".tela")
+        .forEach(
+            tela => {
+
+                tela.classList.add(
+                    "hidden"
+                );
+
+            }
+        );
+
+
+    document
+        .getElementById(id)
+        .classList.remove(
+            "hidden"
+        );
+
+
+    if (id === "jogadores") {
+
+        carregarJogadores();
+
+    }
+
+
+    if (id === "partidas") {
+
+        carregarPartidas();
+
+    }
+
+
+    if (id === "escalacao") {
+
+        carregarDadosEscalacao();
+
+    }
+
+
+    if (id === "votacao") {
+
+        carregarDadosVotacao();
+
+    }
+
+
+    if (id === "ranking") {
+
+        carregarRanking();
+
+    }
+
+}
+
+
+/*******************************************************
+ * CARREGAR SISTEMA
+ *******************************************************/
+
+async function carregarTudo() {
+
+    await carregarJogadores();
+
+    await carregarPartidas();
+
+    atualizarDashboard();
+
+}
+
+
+/*******************************************************
+ * JOGADORES
+ *******************************************************/
+
+async function carregarJogadores() {
+
+    try {
+
+        const resultado =
+            await api(
+                "jogadores"
+            );
+
+
+        if (!resultado.ok) {
+
+            return;
 
         }
 
-    </script>
+
+        jogadores =
+            resultado.jogadores;
+
+
+        atualizarDashboard();
+
+        renderJogadores();
+
+        preencherJogadoresEscala();
+
+    } catch (erro) {
+
+        console.error(erro);
+
+    }
+
+}
+
+
+/*******************************************************
+ * MOSTRAR JOGADORES
+ *******************************************************/
+
+function renderJogadores() {
+
+    const div =
+        document.getElementById(
+            "listaJogadores"
+        );
+
+
+    const ativos =
+        jogadores.filter(
+            j => j.ativo === "SIM"
+        );
+
+
+    if (!ativos.length) {
+
+        div.innerHTML =
+            "<p>Nenhum jogador cadastrado.</p>";
+
+        return;
+
+    }
+
+
+    let html =
+        `<table>
+
+            <tr>
+                <th>Nome</th>
+                <th>Apelido</th>
+                <th>Posição</th>
+                <th>Número</th>
+                <th>Ação</th>
+            </tr>`;
+
+
+    ativos.forEach(
+        j => {
+
+            html += `
+
+                <tr>
+
+                    <td>
+                        ${escapeHtml(j.nome)}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(j.apelido || "-")}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(j.posicao || "-")}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(j.numero || "-")}
+                    </td>
+
+                    <td>
+
+                        <button
+                            class="btn-danger"
+                            onclick="desativarJogador('${j.id}')"
+                        >
+                            Desativar
+                        </button>
+
+                    </td>
+
+                </tr>
+
+            `;
+
+        }
+    );
+
+
+    html +=
+        "</table>";
+
+
+    div.innerHTML =
+        html;
+
+}
+
+
+/*******************************************************
+ * FORMULÁRIO JOGADOR
+ *******************************************************/
+
+function mostrarCadastro() {
+
+    document
+        .getElementById("formJogador")
+        .classList.remove(
+            "hidden"
+        );
+
+}
+
+
+function esconderCadastro() {
+
+    document
+        .getElementById("formJogador")
+        .classList.add(
+            "hidden"
+        );
+
+}
+
+
+/*******************************************************
+ * CADASTRAR JOGADOR
+ *******************************************************/
+
+async function cadastrarJogador() {
+
+    const nome =
+        document
+            .getElementById("jNome")
+            .value
+            .trim();
+
+
+    if (!nome) {
+
+        alert(
+            "Informe o nome do jogador."
+        );
+
+        return;
+
+    }
+
+
+    const resultado =
+        await api(
+            "cadastrar_jogador",
+            {
+
+                nome:
+                    nome,
+
+                apelido:
+                    document
+                        .getElementById("jApelido")
+                        .value,
+
+                posicao:
+                    document
+                        .getElementById("jPosicao")
+                        .value,
+
+                numero:
+                    document
+                        .getElementById("jNumero")
+                        .value,
+
+                email:
+                    document
+                        .getElementById("jEmail")
+                        .value,
+
+                senha:
+                    document
+                        .getElementById("jSenha")
+                        .value
+
+            }
+        );
+
+
+    alert(
+        resultado.ok
+            ? "Jogador cadastrado com sucesso!"
+            : resultado.erro
+    );
+
+
+    if (resultado.ok) {
+
+        document
+            .getElementById("jNome")
+            .value = "";
+
+
+        document
+            .getElementById("jApelido")
+            .value = "";
+
+
+        document
+            .getElementById("jPosicao")
+            .value = "";
+
+
+        document
+            .getElementById("jNumero")
+            .value = "";
+
+
+        document
+            .getElementById("jEmail")
+            .value = "";
+
+
+        document
+            .getElementById("jSenha")
+            .value = "";
+
+
+        esconderCadastro();
+
+
+        await carregarJogadores();
+
+    }
+
+}
+
+
+/*******************************************************
+ * DESATIVAR JOGADOR
+ *******************************************************/
+
+async function desativarJogador(id) {
+
+    if (
+        !confirm(
+            "Deseja realmente desativar este jogador?"
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    const resultado =
+        await api(
+            "excluir_jogador",
+            {
+                id: id
+            }
+        );
+
+
+    alert(
+        resultado.ok
+            ? "Jogador desativado."
+            : resultado.erro
+    );
+
+
+    carregarJogadores();
+
+}
+
+
+/*******************************************************
+ * PARTIDAS
+ *******************************************************/
+
+async function carregarPartidas() {
+
+    try {
+
+        const resultado =
+            await api(
+                "partidas"
+            );
+
+
+        if (!resultado.ok) {
+
+            return;
+
+        }
+
+
+        partidas =
+            resultado.partidas;
+
+
+        atualizarDashboard();
+
+        renderPartidas();
+
+        preencherPartidas();
+
+    } catch (erro) {
+
+        console.error(erro);
+
+    }
+
+}
+
+
+/*******************************************************
+ * MOSTRAR PARTIDAS
+ *******************************************************/
+
+function renderPartidas() {
+
+    const div =
+        document.getElementById(
+            "listaPartidas"
+        );
+
+
+    if (!partidas.length) {
+
+        div.innerHTML =
+            "<p>Nenhuma partida cadastrada.</p>";
+
+        return;
+
+    }
+
+
+    let html =
+        `<table>
+
+            <tr>
+                <th>Data</th>
+                <th>Hora</th>
+                <th>Adversário</th>
+                <th>Local</th>
+                <th>Votação</th>
+                <th>Ações</th>
+            </tr>`;
+
+
+    partidas.forEach(
+        p => {
+
+            html += `
+
+                <tr>
+
+                    <td>
+                        ${escapeHtml(p.data)}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(p.hora || "-")}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(
+                            p.adversario || "-"
+                        )}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(
+                            p.local || "-"
+                        )}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(
+                            p.votacao || "-"
+                        )}
+                    </td>
+
+                    <td>
+
+                        ${
+                            p.votacao === "ABERTA"
+
+                            ?
+
+                            `<button
+                                onclick="encerrarVotacao('${p.id}')"
+                            >
+                                Encerrar
+                            </button>`
+
+                            :
+
+                            `<button
+                                class="btn-success"
+                                onclick="abrirVotacao('${p.id}')"
+                            >
+                                Abrir votação
+                            </button>`
+                        }
+
+
+                        <button
+                            class="btn-danger"
+                            onclick="excluirPartida('${p.id}')"
+                        >
+                            Excluir
+                        </button>
+
+                    </td>
+
+                </tr>
+
+            `;
+
+        }
+    );
+
+
+    html +=
+        "</table>";
+
+
+    div.innerHTML =
+        html;
+
+}
+
+
+/*******************************************************
+ * CRIAR PARTIDA
+ *******************************************************/
+
+async function criarPartida() {
+
+    const data =
+        document
+            .getElementById("pData")
+            .value;
+
+
+    if (!data) {
+
+        alert(
+            "Informe a data da partida."
+        );
+
+        return;
+
+    }
+
+
+    const resultado =
+        await api(
+            "criar_partida",
+            {
+
+                data:
+                    data,
+
+                hora:
+                    document
+                        .getElementById("pHora")
+                        .value,
+
+                adversario:
+                    document
+                        .getElementById("pAdversario")
+                        .value,
+
+                local:
+                    document
+                        .getElementById("pLocal")
+                        .value
+
+            }
+        );
+
+
+    alert(
+        resultado.ok
+            ? "Partida criada com sucesso!"
+            : resultado.erro
+    );
+
+
+    if (resultado.ok) {
+
+        document
+            .getElementById("pData")
+            .value = "";
+
+
+        document
+            .getElementById("pHora")
+            .value = "";
+
+
+        document
+            .getElementById("pAdversario")
+            .value = "";
+
+
+        document
+            .getElementById("pLocal")
+            .value = "";
+
+
+        carregarPartidas();
+
+    }
+
+}
+
+
+/*******************************************************
+ * EXCLUIR PARTIDA
+ *******************************************************/
+
+async function excluirPartida(id) {
+
+    if (
+        !confirm(
+            "Deseja excluir esta partida?"
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    const resultado =
+        await api(
+            "excluir_partida",
+            {
+                id: id
+            }
+        );
+
+
+    alert(
+        resultado.ok
+            ? "Partida excluída."
+            : resultado.erro
+    );
+
+
+    carregarPartidas();
+
+}
+
+
+/*******************************************************
+ * SELECTS
+ *******************************************************/
+
+function preencherPartidas() {
+
+    const selects = [
+
+        "selectPartidaEscala",
+
+        "selectPartidaVoto"
+
+    ];
+
+
+    selects.forEach(
+        id => {
+
+            const select =
+                document.getElementById(id);
+
+
+            if (!select) {
+                return;
+            }
+
+
+            select.innerHTML =
+                `<option value="">
+                    Selecione uma partida
+                </option>`;
+
+
+            partidas.forEach(
+                p => {
+
+                    const option =
+                        document.createElement(
+                            "option"
+                        );
+
+
+                    option.value =
+                        p.id;
+
+
+                    option.textContent =
+                        `${p.data} - ${
+                            p.adversario ||
+                            "Partida"
+                        }`;
+
+
+                    select.appendChild(
+                        option
+                    );
+
+                }
+            );
+
+        }
+    );
+
+}
+
+
+function preencherJogadoresEscala() {
+
+    const select =
+        document.getElementById(
+            "selectJogadorEscala"
+        );
+
+
+    if (!select) {
+        return;
+    }
+
+
+    select.innerHTML =
+        `<option value="">
+            Selecione um jogador
+        </option>`;
+
+
+    jogadores
+        .filter(
+            j => j.ativo === "SIM"
+        )
+        .forEach(
+            j => {
+
+                const option =
+                    document.createElement(
+                        "option"
+                    );
+
+
+                option.value =
+                    j.id;
+
+
+                option.textContent =
+                    `${j.nome} - ${
+                        j.posicao || ""
+                    }`;
+
+
+                select.appendChild(
+                    option
+                );
+
+            }
+        );
+
+}
+
+
+/*******************************************************
+ * ESCALAÇÃO
+ *******************************************************/
+
+function carregarDadosEscalacao() {
+
+    preencherPartidas();
+
+    preencherJogadoresEscala();
+
+}
+
+
+async function carregarEscalados() {
+
+    const partidaId =
+        document
+            .getElementById(
+                "selectPartidaEscala"
+            )
+            .value;
+
+
+    if (!partidaId) {
+
+        document
+            .getElementById(
+                "listaEscalados"
+            )
+            .innerHTML = "";
+
+        return;
+
+    }
+
+
+    const resultado =
+        await api(
+            "escalados",
+            {
+                partida_id:
+                    partidaId
+            }
+        );
+
+
+    if (!resultado.ok) {
+        return;
+    }
+
+
+    escalados =
+        resultado.escalados;
+
+
+    renderEscalados();
+
+}
+
+
+function renderEscalados() {
+
+    const div =
+        document.getElementById(
+            "listaEscalados"
+        );
+
+
+    if (!escalados.length) {
+
+        div.innerHTML =
+            "<p>Nenhum jogador escalado.</p>";
+
+        return;
+
+    }
+
+
+    let html =
+        "<h3>Jogadores escalados</h3>";
+
+
+    escalados.forEach(
+        j => {
+
+            html += `
+
+                <div class="jogador-card">
+
+                    <strong>
+                        ${escapeHtml(j.nome)}
+                    </strong>
+
+                    <br>
+
+                    ${escapeHtml(
+                        j.posicao || ""
+                    )}
+
+                    ${
+                        j.numero
+                        ? " • #" +
+                          escapeHtml(j.numero)
+                        : ""
+                    }
+
+                    <br>
+
+                    <button
+                        class="btn-danger"
+                        onclick="desescalar('${j.jogadorId}')"
+                    >
+                        Retirar
+                    </button>
+
+                </div>
+
+            `;
+
+        }
+    );
+
+
+    div.innerHTML =
+        html;
+
+}
+
+
+/*******************************************************
+ * ESCALAR
+ *******************************************************/
+
+async function escalarJogador() {
+
+    const partidaId =
+        document
+            .getElementById(
+                "selectPartidaEscala"
+            )
+            .value;
+
+
+    const jogadorId =
+        document
+            .getElementById(
+                "selectJogadorEscala"
+            )
+            .value;
+
+
+    if (!partidaId || !jogadorId) {
+
+        alert(
+            "Selecione a partida e o jogador."
+        );
+
+        return;
+
+    }
+
+
+    const resultado =
+        await api(
+            "escalar",
+            {
+
+                partida_id:
+                    partidaId,
+
+                jogador_id:
+                    jogadorId
+
+            }
+        );
+
+
+    alert(
+        resultado.ok
+            ? "Jogador escalado!"
+            : resultado.erro
+    );
+
+
+    if (resultado.ok) {
+
+        carregarEscalados();
+
+    }
+
+}
+
+
+/*******************************************************
+ * DESESCALAR
+ *******************************************************/
+
+async function desescalar(
+    jogadorId
+) {
+
+    const partidaId =
+        document
+            .getElementById(
+                "selectPartidaEscala"
+            )
+            .value;
+
+
+    const resultado =
+        await api(
+            "desescalar",
+            {
+
+                partida_id:
+                    partidaId,
+
+                jogador_id:
+                    jogadorId
+
+            }
+        );
+
+
+    alert(
+        resultado.ok
+            ? "Jogador retirado."
+            : resultado.erro
+    );
+
+
+    carregarEscalados();
+
+}
+
+
+/*******************************************************
+ * VOTAÇÃO
+ *******************************************************/
+
+function carregarDadosVotacao() {
+
+    preencherPartidas();
+
+}
+
+
+async function carregarVotacao() {
+
+    const partidaId =
+        document
+            .getElementById(
+                "selectPartidaVoto"
+            )
+            .value;
+
+
+    const painel =
+        document
+            .getElementById(
+                "painelVotacao"
+            );
+
+
+    if (!partidaId) {
+
+        painel.innerHTML =
+            "";
+
+        return;
+
+    }
+
+
+    const partida =
+        partidas.find(
+            p =>
+                String(p.id) ===
+                String(partidaId)
+        );
+
+
+    if (!partida) {
+        return;
+    }
+
+
+    if (
+        partida.votacao !==
+        "ABERTA"
+    ) {
+
+        painel.innerHTML =
+            `<div class="alert">
+                🔒 A votação está fechada.
+            </div>`;
+
+        return;
+
+    }
+
+
+    const resultado =
+        await api(
+            "escalados",
+            {
+                partida_id:
+                    partidaId
+            }
+        );
+
+
+    if (!resultado.ok) {
+        return;
+    }
+
+
+    const lista =
+        resultado.escalados;
+
+
+    if (!lista.length) {
+
+        painel.innerHTML =
+            `<div class="alert">
+                Nenhum jogador está escalado.
+            </div>`;
+
+        return;
+
+    }
+
+
+    let html =
+        "<h3>Avalie os jogadores</h3>";
+
+
+    lista.forEach(
+        j => {
+
+            if (
+                String(j.jogadorId) ===
+                String(usuario.id)
+            ) {
+
+                return;
+
+            }
+
+
+            html += `
+
+                <div class="jogador-card">
+
+                    <strong>
+                        ${escapeHtml(j.nome)}
+                    </strong>
+
+                    <br>
+
+                    ${escapeHtml(
+                        j.posicao || ""
+                    )}
+
+                    <br><br>
+
+                    <label>
+                        Nota
+                    </label>
+
+                    <select
+                        id="nota_${j.jogadorId}"
+                    >
+
+                        <option value="">
+                            Escolha a nota
+                        </option>
+
+                        <option value="0">
+                            0
+                        </option>
+
+                        <option value="1">
+                            1
+                        </option>
+
+                        <option value="2">
+                            2
+                        </option>
+
+                        <option value="3">
+                            3
+                        </option>
+
+                        <option value="4">
+                            4
+                        </option>
+
+                        <option value="5">
+                            5
+                        </option>
+
+                        <option value="6">
+                            6
+                        </option>
+
+                        <option value="7">
+                            7
+                        </option>
+
+                        <option value="8">
+                            8
+                        </option>
+
+                        <option value="9">
+                            9
+                        </option>
+
+                        <option value="10">
+                            10
+                        </option>
+
+                    </select>
+
+
+                    <button
+                        onclick="votar('${j.jogadorId}')"
+                    >
+                        Enviar nota
+                    </button>
+
+                </div>
+
+            `;
+
+        }
+    );
+
+
+    painel.innerHTML =
+        html;
+
+}
+
+
+/*******************************************************
+ * ENVIAR VOTO
+ *******************************************************/
+
+async function votar(
+    avaliadoId
+) {
+
+    const partidaId =
+        document
+            .getElementById(
+                "selectPartidaVoto"
+            )
+            .value;
+
+
+    const nota =
+        document
+            .getElementById(
+                "nota_" +
+                avaliadoId
+            )
+            .value;
+
+
+    if (nota === "") {
+
+        alert(
+            "Escolha uma nota."
+        );
+
+        return;
+
+    }
+
+
+    const resultado =
+        await api(
+            "votar",
+            {
+
+                partida_id:
+                    partidaId,
+
+                jogador_id:
+                    usuario.id,
+
+                avaliado_id:
+                    avaliadoId,
+
+                nota:
+                    nota
+
+            }
+        );
+
+
+    alert(
+        resultado.ok
+            ? "Nota registrada!"
+            : resultado.erro
+    );
+
+
+    if (resultado.ok) {
+
+        document
+            .getElementById(
+                "nota_" +
+                avaliadoId
+            )
+            .value = "";
+
+    }
+
+}
+
+
+/*******************************************************
+ * ABRIR VOTAÇÃO
+ *******************************************************/
+
+async function abrirVotacao(id) {
+
+    const resultado =
+        await api(
+            "abrir_votacao",
+            {
+                partida_id:
+                    id
+            }
+        );
+
+
+    alert(
+        resultado.ok
+            ? "Votação aberta!"
+            : resultado.erro
+    );
+
+
+    carregarPartidas();
+
+}
+
+
+/*******************************************************
+ * ENCERRAR VOTAÇÃO
+ *******************************************************/
+
+async function encerrarVotacao(id) {
+
+    const resultado =
+        await api(
+            "encerrar_votacao",
+            {
+                partida_id:
+                    id
+            }
+        );
+
+
+    alert(
+        resultado.ok
+            ? "Votação encerrada!"
+            : resultado.erro
+    );
+
+
+    carregarPartidas();
+
+}
+
+
+/*******************************************************
+ * RANKING
+ *******************************************************/
+
+async function carregarRanking() {
+
+    const div =
+        document.getElementById(
+            "listaRanking"
+        );
+
+
+    div.innerHTML =
+        "Carregando ranking...";
+
+
+    const resultado =
+        await api(
+            "ranking"
+        );
+
+
+    if (!resultado.ok) {
+
+        div.innerHTML =
+            `<div class="alert">
+                ❌ Erro ao carregar ranking.
+            </div>`;
+
+        return;
+
+    }
+
+
+    const lista =
+        resultado.ranking;
+
+
+    if (!lista.length) {
+
+        div.innerHTML =
+            "<p>Ainda não existem avaliações.</p>";
+
+        return;
+
+    }
+
+
+    let html =
+        `<table>
+
+            <tr>
+                <th>#</th>
+                <th>Jogador</th>
+                <th>Posição</th>
+                <th>Média</th>
+                <th>Votos</th>
+            </tr>`;
+
+
+    lista.forEach(
+        (j, index) => {
+
+            html += `
+
+                <tr>
+
+                    <td>
+
+                        <span class="ranking-posicao">
+                            ${index + 1}
+                        </span>
+
+                    </td>
+
+
+                    <td>
+
+                        <strong>
+                            ${escapeHtml(j.nome)}
+                        </strong>
+
+                        ${
+                            j.apelido
+                            ?
+                            "<br>" +
+                            escapeHtml(j.apelido)
+                            :
+                            ""
+                        }
+
+                    </td>
+
+
+                    <td>
+                        ${escapeHtml(
+                            j.posicao || "-"
+                        )}
+                    </td>
+
+
+                    <td>
+
+                        <span class="nota">
+                            ${Number(
+                                j.media
+                            ).toFixed(2)}
+                        </span>
+
+                    </td>
+
+
+                    <td>
+                        ${j.votos}
+                    </td>
+
+                </tr>
+
+            `;
+
+        }
+    );
+
+
+    html +=
+        "</table>";
+
+
+    div.innerHTML =
+        html;
+
+}
+
+
+/*******************************************************
+ * DASHBOARD
+ *******************************************************/
+
+function atualizarDashboard() {
+
+    const totalJogadores =
+        jogadores.filter(
+            j => j.ativo === "SIM"
+        ).length;
+
+
+    const totalPartidas =
+        partidas.length;
+
+
+    const elementoJogadores =
+        document.getElementById(
+            "totalJogadores"
+        );
+
+
+    const elementoPartidas =
+        document.getElementById(
+            "totalPartidas"
+        );
+
+
+    if (elementoJogadores) {
+
+        elementoJogadores.textContent =
+            totalJogadores;
+
+    }
+
+
+    if (elementoPartidas) {
+
+        elementoPartidas.textContent =
+            totalPartidas;
+
+    }
+
+}
+
+
+/*******************************************************
+ * SEGURANÇA BÁSICA PARA HTML
+ *******************************************************/
+
+function escapeHtml(valor) {
+
+    return String(valor ?? "")
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+/*******************************************************
+ * INICIALIZAÇÃO
+ *******************************************************/
+
+window.addEventListener(
+    "load",
+    async function() {
+
+        const salvo =
+            localStorage.getItem(
+                "futebolID_usuario"
+            );
+
+
+        if (salvo) {
+
+            try {
+
+                usuario =
+                    JSON.parse(salvo);
+
+                entrarSistema();
+
+                return;
+
+            } catch (erro) {
+
+                localStorage.removeItem(
+                    "futebolID_usuario"
+                );
+
+            }
+
+        }
+
+
+        try {
+
+            const resultado =
+                await api(
+                    "status"
+                );
+
+
+            console.log(
+                "Futebol ID:",
+                resultado
+            );
+
+
+        } catch (erro) {
+
+            console.error(
+                "Erro ao conectar:",
+                erro
+            );
+
+        }
+
+    }
+);
+
+</script>
+
 
 </body>
 
 </html>
-```
